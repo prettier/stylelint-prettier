@@ -1,0 +1,13 @@
+language: node_js
+cache: yarn
+node_js:
+  - '6'
+  - '8'
+  - '10'
+env:
+  - STYLELINT_VERSION=latest
+  - STYLELINT_VERSION=9.1.1
+before_script:
+  - if [[ $STYLELINT_VERSION != "latest" ]]; then
+      yarn upgrade "eslint@$STYLELINT_VERSION";
+    fi

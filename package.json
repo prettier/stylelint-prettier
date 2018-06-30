@@ -1,0 +1,58 @@
+{
+  "name": "stylelint-prettier",
+  "version": "0.1.0",
+  "description": "Runs prettier as an stylelint rule",
+  "keywords": [
+    "stylelint",
+    "stylelint-plugin",
+    "prettier"
+  ],
+  "author": "Ben Scott",
+  "files": [
+    "index.js",
+    "recommended.js",
+    "README.md",
+    "LICENSE.md"
+  ],
+  "main": "stylelint-prettier.js",
+  "scripts": {
+    "lint": "eslint .",
+    "test": "yarn run lint && jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BPScott/stylelint-prettier.git"
+  },
+  "bugs": {
+    "url": "https://github.com/BPScott/stylelint-prettier/issues"
+  },
+  "homepage": "https://github.com/BPScott/stylelint-prettier#readme",
+  "dependencies": {
+    "eslint-plugin-prettier": "^2.1.0"
+  },
+  "peerDependencies": {
+    "prettier": ">= 0.11.0"
+  },
+  "devDependencies": {
+    "eslint": "^3.14.1",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-node": "^4.2.2",
+    "jest": "^23.2.0",
+    "lodash": "^4.17.10",
+    "moment": "^2.22.2",
+    "prettier": "^1.10.2",
+    "semver": "^5.3.0",
+    "stylelint": "^9.1.1",
+    "stylelint-config-prettier": "^3.3.0",
+    "stylelint-test-rule-tape": "^0.2.0"
+  },
+  "engines": {
+    "node": ">=6"
+  },
+  "jest": {
+    "setupFiles": [
+      "./jest-setup.js"
+    ]
+  },
+  "license": "MIT"
+}
