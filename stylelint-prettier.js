@@ -1,3 +1,4 @@
+const postcss = require('postcss');
 const stylelint = require('stylelint');
 const {showInvisibles, generateDifferences} = require('eslint-plugin-prettier');
 
@@ -15,10 +16,10 @@ const messages = stylelint.utils.ruleMessages(ruleName, {
 
 module.exports = stylelint.createPlugin(
   ruleName,
-  (expectaction, options, context) => {
+  (expectation, options, context) => {
     return (root, result) => {
       const validOptions = stylelint.utils.validateOptions(result, ruleName, {
-        actual: expectaction,
+        actual: expectation,
       });
       if (!validOptions) {
         return;
@@ -63,6 +64,38 @@ module.exports = stylelint.createPlugin(
         });
       };
 
+      if (context.fix) {
+        // Fixes must be processed in reverse order, as an early delete shall
+        // change the modification offsets for anything after it
+        const rawData = differences.reverse().reduce((rawData, difference) => {
+          let insertText = '';
+          let deleteText = '';
+          switch (difference.operation) {
+            case 'insert':
+              insertText = difference.insertText;
+              break;
+            case 'delete':
+              deleteText = difference.deleteText;
+              break;
+            case 'replace':
+              insertText = difference.insertText;
+              deleteText = difference.deleteText;
+              break;
+          }
+
+          return (
+            rawData.substring(0, difference.offset) +
+            insertText +
+            rawData.substring(difference.offset + deleteText.length)
+          );
+        }, root.source.input.css);
+
+        result.root.removeAll();
+        result.root.append(postcss.parse(rawData));
+        return;
+      }
+
+      // Report in the the order the differences appear in the content
       differences.forEach((difference) => {
         switch (difference.operation) {
           case 'insert':

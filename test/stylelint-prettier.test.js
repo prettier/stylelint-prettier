@@ -127,6 +127,96 @@ testRule(rule, {
   ],
 });
 
+// Stress Test
+const stressTestInput = `.foo {
+  display: block;;;;;;;;
+}
+
+.first:after,.first:after{color: red;content: "beep";}
+
+.second:after#second {
+color: red;
+content: "beep";
+}
+
+.final:after,.final:after{color: blue;content: "shift";}
+
+
+.baz {
+display: block;
+}.ham{display:inline}
+
+.quz {
+    display: block;;;;;;;;
+}
+
+
+.final:after,.final:after{color: blue;content: "shift";}
+`;
+
+const stressTestExpected = `.foo {
+  display: block;
+}
+
+.first:after,
+.first:after {
+  color: red;
+  content: 'beep';
+}
+
+.second:after#second {
+  color: red;
+  content: 'beep';
+}
+
+.final:after,
+.final:after {
+  color: blue;
+  content: 'shift';
+}
+
+.baz {
+  display: block;
+}
+.ham {
+  display: inline;
+}
+
+.quz {
+  display: block;
+}
+
+.final:after,
+.final:after {
+  color: blue;
+  content: 'shift';
+}
+`;
+
+testRule(rule, {
+  ruleName: rule.ruleName,
+  config: true,
+  codeFilename: filename('default'),
+  fix: true,
+
+  accept: [
+    {
+      description: 'Prettier Insert/Replace/Delete -  Stress Test',
+      code: stressTestExpected,
+    },
+  ],
+  reject: [
+    {
+      description: 'Prettier Insert/Replace/Delete - Stress Test',
+      code: stressTestInput,
+      fixed: stressTestExpected,
+      message: `Delete \";;;;;;;\" (prettier/prettier)`,
+      line: 2,
+      column: 18,
+    },
+  ],
+});
+
 /**
  * Builds a dummy file path to trick prettier into resolving a specific .prettierrc file.
  * @param {string} name - Prettierrc fixture basename.
