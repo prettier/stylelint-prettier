@@ -1,5 +1,4 @@
-The MIT License (MIT)
-=====================
+# The MIT License (MIT)
 
 Copyright © 2017 Ben Scott, Andres Suarez and Teddy Katz
 

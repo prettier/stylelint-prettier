@@ -17,7 +17,8 @@
   "main": "stylelint-prettier.js",
   "scripts": {
     "lint": "eslint .",
-    "test": "yarn run lint && jest"
+    "test": "yarn run lint && jest",
+    "format": "yarn run prettier '**/*.{js,json,md}' --write && yarn run lint --fix"
   },
   "repository": {
     "type": "git",

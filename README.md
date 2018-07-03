@@ -58,13 +58,13 @@ If your desired formatting does not match the `prettier` output, you should use 
 
 To integrate this plugin with `stylelint-config-prettier`, you can use the `"recommended"` configuration:
 
-1. In addition to the above installation instructions, install `stylelint-config-prettier`:
+1.  In addition to the above installation instructions, install `stylelint-config-prettier`:
 
 ```sh
 npm install --save-dev stylelint-config-prettier
 ```
 
-2. Then all you need in your `.stylelintrc` is:
+2.  Then all you need in your `.stylelintrc` is:
 
 ```json
 {
@@ -74,9 +74,9 @@ npm install --save-dev stylelint-config-prettier
 
 This does three things:
 
-1. Enables the `stylelint-plugin-prettier` plugin.
-2. Enables the `prettier/prettier` rule.
-3. Extends the `stylelint-config-prettier` configuration.
+1.  Enables the `stylelint-plugin-prettier` plugin.
+2.  Enables the `prettier/prettier` rule.
+3.  Extends the `stylelint-config-prettier` configuration.
 
 You can then set Prettier's own options inside a `.prettierrc` file.
 
