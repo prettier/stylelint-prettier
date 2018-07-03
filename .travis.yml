@@ -9,5 +9,5 @@ env:
   - STYLELINT_VERSION=9.1.1
 before_script:
   - if [[ $STYLELINT_VERSION != "latest" ]]; then
-      yarn upgrade "eslint@$STYLELINT_VERSION";
+      yarn upgrade "stylelint@$STYLELINT_VERSION";
     fi

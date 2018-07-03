@@ -1,4 +1,4 @@
-# stylelint-prettier [![Build Status](https://travis-ci.org/BPScott/stylelint-prettier.svg?branch=master)](https://travis-ci.org/BPScott/stylelint-prettier)
+# stylelint-prettier [![Build Status](https://www.travis-ci.com/BPScott/stylelint-prettier.svg?branch=master)](https://www.travis-ci.com/BPScott/stylelint-prettier)
 
 Runs [Prettier](https://github.com/prettier/prettier) as a [Stylelint](https://stylelint.io/) rule and reports differences as individual Stylelint issues.
 
