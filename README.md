@@ -33,7 +33,7 @@ style.css
 ## Installation
 
 ```sh
-npm install --save-dev eslint-plugin-prettier
+npm install --save-dev stylelint-prettier
 npm install --save-dev --save-exact prettier
 ```
 
@@ -100,7 +100,7 @@ NB: This option will merge and override any config set with `.prettierrc` files 
 
 ## Contributing
 
-See [CONTRIBUTING.md](https://github.com/prettier/eslint-plugin-prettier/blob/master/CONTRIBUTING.md)
+See [CONTRIBUTING.md](https://github.com/BPScott/stylelint-prettier/blob/master/CONTRIBUTING.md)
 
 ## Inspiration
 
