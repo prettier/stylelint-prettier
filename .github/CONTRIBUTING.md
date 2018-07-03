@@ -24,8 +24,22 @@ This plugin is used to lint itself. The style is checked when `npm test` is run,
 
 ## Publishing
 
-```bash
-node build/release.js
-git push --follow-tags
-npm publish
-```
+- Ensure you are on the master branch locally.
+- Update `CHANGELOG.md` and commit.
+- Run the following:
+
+  ```sh
+  yarn publish
+  git push --follow-tags
+  ```
+
+  Running `yarn publish` shall:
+
+  - Bump the version in package.json (asking you for the new version number)
+  - Create a new commit containing that version bump in package.json
+  - Create a tag for that commit
+  - Publish to the npm repository
+
+  Running `git push --follow-tags` shall:
+
+  - Push the commit and tag to GitHub
