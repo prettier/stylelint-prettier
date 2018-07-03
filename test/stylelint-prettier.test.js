@@ -43,7 +43,7 @@ testRule(rule, {
   ],
 });
 
-// // Reading from custom .prettierrc
+// Reading from custom .prettierrc
 testRule(rule, {
   ruleName: rule.ruleName,
   config: true,
@@ -210,9 +210,34 @@ testRule(rule, {
       description: 'Prettier Insert/Replace/Delete - Stress Test',
       code: stressTestInput,
       fixed: stressTestExpected,
-      message: `Delete \";;;;;;;\" (prettier/prettier)`,
+      message: `Delete ";;;;;;;" (prettier/prettier)`,
       line: 2,
       column: 18,
+    },
+  ],
+});
+
+// Test trailing commas in near-empty scss files
+testRule(rule, {
+  ruleName: rule.ruleName,
+  config: [true, {trailingComma: 'all'}],
+  codeFilename: filename('default', 'scss'),
+  fix: true,
+
+  accept: [
+    {
+      description: 'Prettier Scss Valid - Formatting Trailing Commas',
+      code: `$map: (\n  'alpha': 10,\n  'beta': 20,\n  'gamma': 30,\n);\n`,
+    },
+  ],
+  reject: [
+    {
+      description: 'Prettier Scss Invalid - Formatting Trailing Commas',
+      code: `$map: (\n  'alpha': 10,\n  'beta': 20,\n  'gamma': 30\n);\n`,
+      fixed: `$map: (\n  'alpha': 10,\n  'beta': 20,\n  'gamma': 30,\n);\n`,
+      message: `Insert "," (prettier/prettier)`,
+      line: 4,
+      column: 14,
     },
   ],
 });
@@ -222,6 +247,6 @@ testRule(rule, {
  * @param {string} name - Prettierrc fixture basename.
  * @returns {string} A filename relative to the .prettierrc config.
  */
-function filename(name) {
-  return path.resolve(__dirname, `./prettierrc/${name}/dummy.scss`);
+function filename(name, ext = 'css') {
+  return path.resolve(__dirname, `./prettierrc/${name}/dummy.${ext}`);
 }

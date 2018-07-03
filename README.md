@@ -101,3 +101,7 @@ NB: This option will merge and override any config set with `.prettierrc` files 
 ## Contributing
 
 See [CONTRIBUTING.md](https://github.com/prettier/eslint-plugin-prettier/blob/master/CONTRIBUTING.md)
+
+## Inspiration
+
+The layout for this codebase and base configuration of prettier was taken from <https://github.com/prettier/eslint-plugin-prettier>
