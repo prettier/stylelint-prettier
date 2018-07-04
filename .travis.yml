@@ -6,7 +6,7 @@ node_js:
   - '10'
 env:
   - STYLELINT_VERSION=latest
-  - STYLELINT_VERSION=9.1.1
+  - STYLELINT_VERSION=9.2.1
 before_script:
   - if [[ $STYLELINT_VERSION != "latest" ]]; then
       yarn upgrade "stylelint@$STYLELINT_VERSION";
