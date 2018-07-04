@@ -1,4 +1,3 @@
-const postcss = require('postcss');
 const stylelint = require('stylelint');
 const {showInvisibles, generateDifferences} = require('eslint-plugin-prettier');
 
@@ -90,8 +89,8 @@ module.exports = stylelint.createPlugin(
           );
         }, root.source.input.css);
 
-        result.root.removeAll();
-        result.root.append(postcss.parse(rawData));
+        root.removeAll();
+        root.append(root.source.syntax.parse(rawData, root.source.input.opts));
         return;
       }
 

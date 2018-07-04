@@ -6,9 +6,6 @@ module.exports = {
   env: {node: true, jest: true},
   root: true,
   rules: {
-    'node/no-unpublished-require': [
-      'error',
-      {allowModules: ['stylelint', 'postcss']},
-    ],
+    'node/no-unpublished-require': ['error', {allowModules: ['stylelint']}],
   },
 };

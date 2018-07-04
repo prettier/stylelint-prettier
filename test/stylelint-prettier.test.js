@@ -127,8 +127,8 @@ testRule(rule, {
   ],
 });
 
-// Stress Test
-const stressTestInput = `.foo {
+// Css Stress Test
+const stressTestCssInput = `.foo {
   display: block;;;;;;;;
 }
 
@@ -154,7 +154,7 @@ display: block;
 .final:after,.final:after{color: blue;content: "shift";}
 `;
 
-const stressTestExpected = `.foo {
+const stressTestCssExpected = `.foo {
   display: block;
 }
 
@@ -201,17 +201,170 @@ testRule(rule, {
 
   accept: [
     {
-      description: 'Prettier Insert/Replace/Delete -  Stress Test',
-      code: stressTestExpected,
+      description: 'Prettier Insert/Replace/Delete - Stress Test',
+      code: stressTestCssExpected,
     },
   ],
   reject: [
     {
       description: 'Prettier Insert/Replace/Delete - Stress Test',
-      code: stressTestInput,
-      fixed: stressTestExpected,
+      code: stressTestCssInput,
+      fixed: stressTestCssExpected,
       message: `Delete ";;;;;;;" (prettier/prettier)`,
       line: 2,
+      column: 18,
+    },
+  ],
+});
+
+// Scss Stress test
+stressTestScssInput = `$size: rem(10px);;;
+$base-position: rem(-4px);
+
+.Indicator {
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    background-color: color('teal');
+    right: $base-position;
+    top: $base-position;
+    width: $size;
+    height: $size;
+    border-radius: 100%;
+  }
+}
+
+.pulseIndicator::before {
+  z-index: 1;
+  animation: bounce 5s ease infinite;
+}
+
+.pulseIndicator::after {
+  right: $base-position;
+  top: $base-position;
+  animation: pulse 5s ease infinite;
+}
+
+$pip-animation: (
+  start-scaling-small: 65%,
+  finish-scaling-small: 75%,
+  finish-scaling-big: 82.5%,
+  finish-scaling: 85%
+);
+
+@keyframes bounce {
+  from,
+  #{map-get($pip-animation, start-scaling-small)},
+  #{map-get($pip-animation, finish-scaling)} {
+    transform: scale(1);
+  }
+
+  #{map-get($pip-animation, finish-scaling-small)} {transform: scale(0.85)}
+
+  #{map-get($pip-animation, finish-scaling-big)} {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes pulse {
+  from,
+  #{map-get($pip-animation, finish-scaling-small)} {
+    transform: scale(0.85);
+    opacity: 1;
+  }
+
+  to {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+`;
+
+const stressTestScssExpected = `$size: rem(10px);
+$base-position: rem(-4px);
+
+.Indicator {
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    background-color: color('teal');
+    right: $base-position;
+    top: $base-position;
+    width: $size;
+    height: $size;
+    border-radius: 100%;
+  }
+}
+
+.pulseIndicator::before {
+  z-index: 1;
+  animation: bounce 5s ease infinite;
+}
+
+.pulseIndicator::after {
+  right: $base-position;
+  top: $base-position;
+  animation: pulse 5s ease infinite;
+}
+
+$pip-animation: (
+  start-scaling-small: 65%,
+  finish-scaling-small: 75%,
+  finish-scaling-big: 82.5%,
+  finish-scaling: 85%,
+);
+
+@keyframes bounce {
+  from,
+  #{map-get($pip-animation, start-scaling-small)},
+  #{map-get($pip-animation, finish-scaling)} {
+    transform: scale(1);
+  }
+
+  #{map-get($pip-animation, finish-scaling-small)} {
+    transform: scale(0.85);
+  }
+
+  #{map-get($pip-animation, finish-scaling-big)} {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes pulse {
+  from,
+  #{map-get($pip-animation, finish-scaling-small)} {
+    transform: scale(0.85);
+    opacity: 1;
+  }
+
+  to {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+`;
+
+testRule(rule, {
+  ruleName: rule.ruleName,
+  config: true,
+  codeFilename: filename('default', 'scss'),
+  fix: true,
+
+  accept: [
+    {
+      description: 'Prettier Insert/Replace/Delete - Scss Stress Test',
+      code: stressTestScssExpected,
+    },
+  ],
+  reject: [
+    {
+      description: 'Prettier Insert/Replace/Delete - Scss Stress Test',
+      code: stressTestScssInput,
+      fixed: stressTestScssExpected,
+      message: `Delete ";;" (prettier/prettier)`,
+      line: 1,
       column: 18,
     },
   ],
