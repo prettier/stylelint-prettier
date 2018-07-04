@@ -89,8 +89,25 @@ module.exports = stylelint.createPlugin(
           );
         }, root.source.input.css);
 
+        const newRoot = root.source.syntax.parse(
+          rawData,
+          root.source.input.opts
+        );
+
+        // For reasons I don't really undersand, when the original input does
+        // not have a trailing newline, newRoot generates a trailing newline but
+        // it does not get included in the output.
+        // Cleaning the root raws (to remove any existing whitespace), then
+        // adding the final new line into the root raws seems to fix this
         root.removeAll();
-        root.append(root.source.syntax.parse(rawData, root.source.input.opts));
+        root.cleanRaws();
+        root.append(newRoot);
+
+        // Use the EOL whitespace from the rawData, as it could be \n or \r\n
+        const trailingWhitespace = rawData.match(/[\s\uFEFF\xA0]+$/)[0];
+        if (trailingWhitespace.length) {
+          root.raws.after = trailingWhitespace[0];
+        }
         return;
       }
 

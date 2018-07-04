@@ -127,6 +127,57 @@ testRule(rule, {
   ],
 });
 
+// Testing Comments
+testRule(rule, {
+  ruleName: rule.ruleName,
+  config: true,
+  codeFilename: filename('default'),
+  fix: true,
+
+  accept: [
+    {
+      description: 'Prettier Valid Raws - trailing newline',
+      code: '/* start */\n.x {\n  color: red; /* middle */\n}\n',
+    },
+    {
+      description: 'Prettier Valid Raws - windows trailing newline',
+      code: '/* start */\r\n.x {\r\n  color: red; /* middle */\r\n}\r\n',
+    },
+    {
+      description: 'Prettier Valid Raws - comment and newline',
+      code: '/* start */\n.x {\n  color: red; /* middle */\n}\n/* end */\n',
+    },
+  ],
+  reject: [
+    {
+      description: 'Prettier Invalid Raws - no trailing newline',
+      code: '/* start */\n.x {\n  color: red; /* middle */\n}',
+      fixed: '/* start */\n.x {\n  color: red; /* middle */\n}\n',
+      message: 'Insert "⏎" (prettier/prettier)',
+      line: 4,
+      column: 2,
+    },
+    // This should pass but the output goes a bit weird, probably due to
+    // showInvisibles not having a character for \r
+    // {
+    //   description: 'Prettier Invalid Raws - no trailing windows newline',
+    //   code: '/* start */\r\n.x {\r\n  color: red; /* middle */\r\n}',
+    //   fixed: '/* start */\r\n.x {\r\n  color: red; /* middle */\r\n}\r\n',
+    //   message: 'Insert "\r⏎" (prettier/prettier)',
+    //   line: 4,
+    //   column: 2,
+    // },
+    {
+      description: 'Prettier Invalid Raws - comment and no newline',
+      code: '/* start */\n.x {\n  color: red; /* middle */\n}\n/* end */',
+      fixed: '/* start */\n.x {\n  color: red; /* middle */\n}\n/* end */\n',
+      message: 'Insert "⏎" (prettier/prettier)',
+      line: 5,
+      column: 10,
+    },
+  ],
+});
+
 // Css Stress Test
 const stressTestCssInput = `.foo {
   display: block;;;;;;;;
