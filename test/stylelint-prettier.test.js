@@ -157,13 +157,12 @@ testRule(rule, {
       line: 4,
       column: 2,
     },
-    // This should pass but the output goes a bit weird, probably due to
-    // showInvisibles not having a character for \r
+    // This should pass but the output goes a bit weird
     // {
     //   description: 'Prettier Invalid Raws - no trailing windows newline',
     //   code: '/* start */\r\n.x {\r\n  color: red; /* middle */\r\n}',
     //   fixed: '/* start */\r\n.x {\r\n  color: red; /* middle */\r\n}\r\n',
-    //   message: 'Insert "\r⏎" (prettier/prettier)',
+    //   message: 'Insert "␍⏎" (prettier/prettier)',
     //   line: 4,
     //   column: 2,
     // },
