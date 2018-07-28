@@ -34,13 +34,23 @@ module.exports = stylelint.createPlugin(
 
       const prettierRcOptions =
         prettier.resolveConfig && prettier.resolveConfig.sync
-          ? prettier.resolveConfig.sync(filepath, {
-              editorconfig: true,
-            })
+          ? prettier.resolveConfig.sync(filepath, {editorconfig: true})
           : null;
+
+      //prettier.getFileInfo was added in v1.13
+      const prettierFileInfo =
+        prettier.getFileInfo && prettier.getFileInfo.sync
+          ? prettier.getFileInfo.sync(filepath, {ignorePath: '.prettierignore'})
+          : {ignored: false, inferredParser: null};
+
+      // Skip if file is ignored using a .prettierignore file
+      if (prettierFileInfo.ignored) {
+        return;
+      }
 
       const prettierOptions = Object.assign({}, prettierRcOptions, options, {
         filepath,
+        parser: prettierFileInfo.inferredParser,
       });
       const prettierSource = prettier.format(source, prettierOptions);
 
