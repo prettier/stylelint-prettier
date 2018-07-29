@@ -127,6 +127,19 @@ testRule(rule, {
   ],
 });
 
+// Ignoring files in .prettierignore
+testRule(rule, {
+  ruleName: rule.ruleName,
+  config: true,
+  codeFilename: filename('default', 'ignore-me.css'),
+  accept: [
+    {
+      description: 'Prettier Valid - Ignored file',
+      code: '.x {color: red;}',
+    },
+  ],
+});
+
 // Testing Comments
 testRule(rule, {
   ruleName: rule.ruleName,
@@ -399,7 +412,7 @@ $pip-animation: (
 testRule(rule, {
   ruleName: rule.ruleName,
   config: true,
-  codeFilename: filename('default', 'scss'),
+  codeFilename: filename('default', 'dummy.scss'),
   fix: true,
 
   accept: [
@@ -424,7 +437,7 @@ testRule(rule, {
 testRule(rule, {
   ruleName: rule.ruleName,
   config: [true, {trailingComma: 'all'}],
-  codeFilename: filename('default', 'scss'),
+  codeFilename: filename('default', 'dummy.scss'),
   fix: true,
 
   accept: [
@@ -447,9 +460,7 @@ testRule(rule, {
 
 /**
  * Builds a dummy file path to trick prettier into resolving a specific .prettierrc file.
- * @param {string} name - Prettierrc fixture basename.
- * @returns {string} A filename relative to the .prettierrc config.
  */
-function filename(name, ext = 'css') {
-  return path.resolve(__dirname, `./prettierrc/${name}/dummy.${ext}`);
+function filename(dir, file = 'dummy.css') {
+  return path.resolve(__dirname, `./prettierrc/${dir}/${file}`);
 }
