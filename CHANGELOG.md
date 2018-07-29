@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.2 (2018-07-29)
+
+- Better formatting of `\r` in reporting
+- Bump minimum required eslint-plugin-prettier version to 2.6.2
+- Ignore files that are specified in a .prettierignore file
+
 ## 0.2.1 (2018-07-03)
 
 - Ensure non-css languages (e.g. scss) would be parsed correctly when autofixing
