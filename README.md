@@ -60,17 +60,17 @@ To integrate this plugin with `stylelint-config-prettier`, you can use the `"rec
 
 1.  In addition to the above installation instructions, install `stylelint-config-prettier`:
 
-```sh
-npm install --save-dev stylelint-config-prettier
-```
+    ```sh
+    npm install --save-dev stylelint-config-prettier
+    ```
 
 2.  Then all you need in your `.stylelintrc` is:
 
-```json
-{
-  "extends": ["stylelint-prettier/recommended"]
-}
-```
+    ```json
+    {
+      "extends": ["stylelint-prettier/recommended"]
+    }
+    ```
 
 This does three things:
 
