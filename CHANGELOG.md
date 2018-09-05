@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.1 (2018-09-05)
+
+- Allow using overrides in `.prettierrc` to lint non-standard file extensions (#3)
+
 ## 1.0.0 (2018-09-05)
 
 The code for v1.0.0 is identical to v0.2.2. It has been used in production for a
