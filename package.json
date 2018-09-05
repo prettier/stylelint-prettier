@@ -9,7 +9,7 @@
   ],
   "author": "Ben Scott",
   "files": [
-    "index.js",
+    "stylelint-prettier.js",
     "recommended.js",
     "README.md",
     "LICENSE.md"
