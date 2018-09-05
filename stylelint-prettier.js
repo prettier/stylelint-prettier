@@ -50,7 +50,6 @@ module.exports = stylelint.createPlugin(
 
       const prettierOptions = Object.assign({}, prettierRcOptions, options, {
         filepath,
-        parser: prettierFileInfo.inferredParser,
       });
       const prettierSource = prettier.format(source, prettierOptions);
 

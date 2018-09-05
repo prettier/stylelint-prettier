@@ -127,6 +127,29 @@ testRule(rule, {
   ],
 });
 
+// Use the parser specified in overrides in .prettierrc
+testRule(rule, {
+  ruleName: rule.ruleName,
+  config: true,
+  codeFilename: filename('default', 'dummy.wxss'),
+  accept: [
+    {
+      description: 'Prettier Valid - Default .prettierrc',
+      code: '.x {\n  color: red;\n}\n',
+    },
+  ],
+  reject: [
+    {
+      description: 'Prettier Insert - Default .prettierrc',
+      code: '.x {\ncolor: red;\n}\n',
+      fixed: '.x {\n  color: red;\n}\n',
+      message: 'Insert "··" (prettier/prettier)',
+      line: 2,
+      column: 1,
+    },
+  ],
+});
+
 // Ignoring files in .prettierignore
 testRule(rule, {
   ruleName: rule.ruleName,
