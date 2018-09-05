@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.0 (2018-09-05)
+
+The code for v1.0.0 is identical to v0.2.2. It has been used in production for a
+little while and I consider it stable.
+
+- Minor readme tweaks
+
 ## 0.2.2 (2018-07-29)
 
 - Better formatting of `\r` in reporting
