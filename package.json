@@ -22,12 +22,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/BPScott/stylelint-prettier.git"
+    "url": "git+https://github.com/prettier/stylelint-prettier.git"
   },
   "bugs": {
-    "url": "https://github.com/BPScott/stylelint-prettier/issues"
+    "url": "https://github.com/prettier/stylelint-prettier/issues"
   },
-  "homepage": "https://github.com/BPScott/stylelint-prettier#readme",
+  "homepage": "https://github.com/prettier/stylelint-prettier#readme",
   "dependencies": {
     "eslint-plugin-prettier": "^2.6.2"
   },

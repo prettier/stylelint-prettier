@@ -5,7 +5,7 @@ Thanks for contributing!
 ## Installation
 
 ```sh
-git clone https://github.com/BPScott/stylelint-prettier.git
+git clone https://github.com/prettier/stylelint-prettier.git
 cd stylelint-prettier
 yarn install
 ```

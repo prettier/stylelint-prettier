@@ -1,4 +1,4 @@
-# stylelint-prettier [![Build Status](https://www.travis-ci.com/BPScott/stylelint-prettier.svg?branch=master)](https://www.travis-ci.com/BPScott/stylelint-prettier)
+# stylelint-prettier [![Build Status](https://www.travis-ci.org/prettier/stylelint-prettier.svg?branch=master)](https://www.travis-ci.org/prettier/stylelint-prettier)
 
 Runs [Prettier](https://github.com/prettier/prettier) as a [Stylelint](https://stylelint.io/) rule and reports differences as individual Stylelint issues.
 
@@ -100,7 +100,7 @@ NB: This option will merge and override any config set with `.prettierrc` files 
 
 ## Contributing
 
-See [CONTRIBUTING.md](https://github.com/BPScott/stylelint-prettier/blob/master/.github/CONTRIBUTING.md)
+See [CONTRIBUTING.md](https://github.com/prettier/stylelint-prettier/blob/master/.github/CONTRIBUTING.md)
 
 ## Inspiration
 
