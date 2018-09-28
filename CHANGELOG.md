@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.2 (2018-09-28)
+
+- Update documentation and package.json to reflect the new repo location as part of the prettier GitHub organization (#5)
+
 ## 1.0.1 (2018-09-05)
 
 - Allow using overrides in `.prettierrc` to lint non-standard file extensions (#3)
