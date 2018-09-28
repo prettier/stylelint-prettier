@@ -33,8 +33,7 @@ style.css
 ## Installation
 
 ```sh
-npm install --save-dev stylelint-prettier
-npm install --save-dev --save-exact prettier
+npm install --save-dev stylelint-prettier prettier
 ```
 
 **_`stylelint-prettier` does not install Prettier or Stylelint for you._** _You must install these yourself._
