@@ -1,5 +1,10 @@
 const stylelint = require('stylelint');
-const {showInvisibles, generateDifferences} = require('eslint-plugin-prettier');
+const {
+  showInvisibles,
+  generateDifferences,
+} = require('prettier-linter-helpers');
+
+const {INSERT, DELETE, REPLACE} = generateDifferences;
 
 let prettier;
 
@@ -95,13 +100,13 @@ module.exports = stylelint.createPlugin(
           let insertText = '';
           let deleteText = '';
           switch (difference.operation) {
-            case 'insert':
+            case INSERT:
               insertText = difference.insertText;
               break;
-            case 'delete':
+            case DELETE:
               deleteText = difference.deleteText;
               break;
-            case 'replace':
+            case REPLACE:
               insertText = difference.insertText;
               deleteText = difference.deleteText;
               break;
@@ -139,13 +144,13 @@ module.exports = stylelint.createPlugin(
       // Report in the the order the differences appear in the content
       differences.forEach((difference) => {
         switch (difference.operation) {
-          case 'insert':
+          case INSERT:
             report(messages.insert(difference.insertText), difference.offset);
             break;
-          case 'delete':
+          case DELETE:
             report(messages.delete(difference.deleteText), difference.offset);
             break;
-          case 'replace':
+          case REPLACE:
             report(
               messages.replace(difference.deleteText, difference.insertText),
               difference.offset
