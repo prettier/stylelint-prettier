@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.3 (2018-10-01)
+
+- Use the CSS parser when no filename is specified
+- Use prettier-linter-helpers instead of depending on eslint-plugin-prettier (#7)
+
 ## 1.0.2 (2018-09-28)
 
 - Update documentation and package.json to reflect the new repo location as part of the prettier GitHub organization (#5)
