@@ -127,6 +127,30 @@ testRule(rule, {
   ],
 });
 
+// Use the css parser if no filename was specified
+testRule(rule, {
+  ruleName: rule.ruleName,
+  config: true,
+  fix: true,
+
+  accept: [
+    {
+      description: 'Prettier Valid',
+      code: '.x {\n  color: red;\n}\n',
+    },
+  ],
+  reject: [
+    {
+      description: 'Prettier Insert',
+      code: '.x {\ncolor: red;\n}\n',
+      fixed: '.x {\n  color: red;\n}\n',
+      message: 'Insert "··" (prettier/prettier)',
+      line: 2,
+      column: 1,
+    },
+  ],
+});
+
 // Use the parser specified in overrides in .prettierrc
 testRule(rule, {
   ruleName: rule.ruleName,

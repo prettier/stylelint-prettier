@@ -15,7 +15,7 @@ const messages = stylelint.utils.ruleMessages(ruleName, {
 
 module.exports = stylelint.createPlugin(
   ruleName,
-  (expectation, options, context) => {
+  (expectation, stylelintPrettierOptions, context) => {
     return (root, result) => {
       const validOptions = stylelint.utils.validateOptions(result, ruleName, {
         actual: expectation,
@@ -29,7 +29,9 @@ module.exports = stylelint.createPlugin(
         prettier = require('prettier');
       }
 
-      const filepath = root.source.input.file;
+      // Default to '<input>' if a filepath was not provided.
+      // This mimics eslint's behaviour
+      const filepath = root.source.input.file || '<input>';
       const source = root.source.input.css;
 
       const prettierRcOptions =
@@ -48,9 +50,23 @@ module.exports = stylelint.createPlugin(
         return;
       }
 
-      const prettierOptions = Object.assign({}, prettierRcOptions, options, {
-        filepath,
-      });
+      const initialOptions = {};
+
+      // If no filepath was provided then assume the CSS parser
+      // This is added to the options first, so that
+      // prettierRcOptions and stylelintPrettierOptions can still override
+      // the parser.
+      if (filepath == '<input>') {
+        initialOptions.parser = 'css';
+      }
+
+      const prettierOptions = Object.assign(
+        {},
+        initialOptions,
+        prettierRcOptions,
+        stylelintPrettierOptions,
+        {filepath}
+      );
       const prettierSource = prettier.format(source, prettierOptions);
 
       // Everything is the same. Nothing to do here;
