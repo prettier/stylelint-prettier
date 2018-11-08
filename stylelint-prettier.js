@@ -69,7 +69,7 @@ module.exports = stylelint.createPlugin(
         {},
         initialOptions,
         prettierRcOptions,
-        stylelintPrettierOptions,
+        omitStylelintSpecificOptions(stylelintPrettierOptions),
         {filepath}
       );
       const prettierSource = prettier.format(source, prettierOptions);
@@ -161,6 +161,12 @@ module.exports = stylelint.createPlugin(
     };
   }
 );
+
+function omitStylelintSpecificOptions(options) {
+  const prettierOptions = Object.assign({}, options);
+  delete prettierOptions.severity;
+  return prettierOptions;
+}
 
 module.exports.ruleName = ruleName;
 module.exports.messages = messages;
