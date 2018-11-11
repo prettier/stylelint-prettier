@@ -20,7 +20,7 @@ const messages = stylelint.utils.ruleMessages(ruleName, {
 
 module.exports = stylelint.createPlugin(
   ruleName,
-  (expectation, stylelintPrettierOptions, context) => {
+  (expectation, options, context) => {
     return (root, result) => {
       const validOptions = stylelint.utils.validateOptions(result, ruleName, {
         actual: expectation,
@@ -28,6 +28,8 @@ module.exports = stylelint.createPlugin(
       if (!validOptions) {
         return;
       }
+
+      const stylelintPrettierOptions = omitStylelintSpecificOptions(options);
 
       if (!prettier) {
         // Prettier is expensive to load, so only load it if needed.
@@ -69,7 +71,7 @@ module.exports = stylelint.createPlugin(
         {},
         initialOptions,
         prettierRcOptions,
-        omitStylelintSpecificOptions(stylelintPrettierOptions),
+        stylelintPrettierOptions,
         {filepath}
       );
       const prettierSource = prettier.format(source, prettierOptions);
