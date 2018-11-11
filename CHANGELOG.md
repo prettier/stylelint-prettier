@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.4 (2018-11-11)
+
+- Do not pass stylelint built-in options `severity` and `messsage` to prettier (#10)
+
 ## 1.0.3 (2018-10-01)
 
 - Use the CSS parser when no filename is specified
