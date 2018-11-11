@@ -164,6 +164,7 @@ module.exports = stylelint.createPlugin(
 
 function omitStylelintSpecificOptions(options) {
   const prettierOptions = Object.assign({}, options);
+  delete prettierOptions.message;
   delete prettierOptions.severity;
   return prettierOptions;
 }

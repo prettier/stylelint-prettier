@@ -1,5 +1,6 @@
 const path = require('path');
 const rule = require('..');
+const stylelint = require('stylelint');
 
 // Reading from default .prettierrc
 testRule(rule, {
@@ -503,6 +504,53 @@ testRule(rule, {
       column: 14,
     },
   ],
+});
+
+describe('stylelint configurations', () => {
+  const oldWarn = console.warn;
+  beforeEach(() => {
+    console.warn = jest.fn(console.warn);
+  });
+
+  afterEach(() => {
+    console.warn = oldWarn;
+  });
+
+  it("doesn't raise prettier warnings on `message`", () => {
+    const linted = stylelint.lint({
+      code: ``,
+      config: {
+        plugins: ['./'],
+        rules: {
+          'prettier/prettier': [true, {message: 'welp'}],
+        },
+      },
+    });
+
+    return linted.then(() => {
+      expect(console.warn).not.toHaveBeenCalledWith(
+        expect.stringMatching(/ignored unknown option.+message/i)
+      );
+    });
+  });
+
+  it("doesn't raise prettier warnings on `severity`", () => {
+    const linted = stylelint.lint({
+      code: ``,
+      config: {
+        plugins: ['./'],
+        rules: {
+          'prettier/prettier': [true, {severity: 'warning'}],
+        },
+      },
+    });
+
+    return linted.then(() => {
+      expect(console.warn).not.toHaveBeenCalledWith(
+        expect.stringMatching(/ignored unknown option.+severity/i)
+      );
+    });
+  });
 });
 
 /**
