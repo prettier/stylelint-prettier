@@ -506,6 +506,31 @@ testRule(rule, {
   ],
 });
 
+// Passing a syntax works
+testRule(rule, {
+  ruleName: rule.ruleName,
+  config: [true, {parser: 'scss'}],
+  syntax: 'scss',
+  fix: true,
+
+  accept: [
+    {
+      description: 'Prettier Scss Valid - Setting Explicit Parser',
+      code: `// I am a scss-specific comment\n$foo: ();\n`,
+    },
+  ],
+  reject: [
+    {
+      description: 'Prettier Scss Invalid - Setting Explicit Parser',
+      code: `// I am a scss-specific comment\n  $foo:();`,
+      fixed: `// I am a scss-specific comment\n$foo: ();\n`,
+      message: `Replace "··$foo:();" with "$foo:·();⏎" (prettier/prettier)`,
+      line: 1,
+      column: 33,
+    },
+  ],
+});
+
 describe('stylelint configurations', () => {
   const oldWarn = console.warn;
   beforeEach(() => {
