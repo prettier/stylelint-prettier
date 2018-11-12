@@ -509,24 +509,23 @@ testRule(rule, {
 // Passing a syntax works
 testRule(rule, {
   ruleName: rule.ruleName,
-  config: [true, {parser: 'scss'}],
+  config: [true, {parser: 'scss', trailingComma: 'all'}],
   syntax: 'scss',
   fix: true,
-
   accept: [
     {
       description: 'Prettier Scss Valid - Setting Explicit Parser',
-      code: `// I am a scss-specific comment\n$foo: ();\n`,
+      code: `$map: (\n  'alpha': 10,\n  'beta': 20,\n  'gamma': 30,\n);\n`,
     },
   ],
   reject: [
     {
       description: 'Prettier Scss Invalid - Setting Explicit Parser',
-      code: `// I am a scss-specific comment\n  $foo:();`,
-      fixed: `// I am a scss-specific comment\n$foo: ();\n`,
-      message: `Replace "··$foo:();" with "$foo:·();⏎" (prettier/prettier)`,
-      line: 1,
-      column: 33,
+      code: `$map: (\n  'alpha': 10,\n  'beta': 20,\n  'gamma': 30\n);\n`,
+      fixed: `$map: (\n  'alpha': 10,\n  'beta': 20,\n  'gamma': 30,\n);\n`,
+      message: `Insert "," (prettier/prettier)`,
+      line: 4,
+      column: 14,
     },
   ],
 });
