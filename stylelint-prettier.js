@@ -121,10 +121,13 @@ module.exports = stylelint.createPlugin(
           );
         }, root.source.input.css);
 
-        const newRoot = root.source.syntax.parse(
-          rawData,
-          root.source.input.opts
-        );
+        // If root.source.syntax exists then it means stylelint had to use
+        // postcss-syntax to guess the postcss parser that it should use based
+        // upon the input filename.
+        // In that case we want to use the parser that postcss-syntax picked.
+        // Otherwise use the syntax parser that was provided in the options
+        const syntax = root.source.syntax || result.opts.syntax;
+        const newRoot = syntax.parse(rawData);
 
         // For reasons I don't really undersand, when the original input does
         // not have a trailing newline, newRoot generates a trailing newline but
