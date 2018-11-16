@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.5 (2018-11-16)
+
+- Specifying an explict syntax with `--syntax` will no longer crash when autofixing (#11)
+
 ## 1.0.4 (2018-11-11)
 
 - Do not pass stylelint built-in options `severity` and `messsage` to prettier (#10)
