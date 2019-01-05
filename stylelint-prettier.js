@@ -74,7 +74,36 @@ module.exports = stylelint.createPlugin(
         stylelintPrettierOptions,
         {filepath}
       );
-      const prettierSource = prettier.format(source, prettierOptions);
+      try {
+        prettierSource = prettier.format(source, prettierOptions);
+      } catch (err) {
+        if (!(err instanceof SyntaxError)) {
+          throw err;
+        }
+
+        let message = 'Parsing error: ' + err.message;
+
+        // Prettier's message contains a codeframe style preview of the
+        // invalid code and the line/column at which the error occured.
+        // ESLint shows those pieces of information elsewhere already so
+        // remove them from the message
+        if (err.codeFrame) {
+          message = message.replace(`\n${err.codeFrame}`, '');
+        }
+        if (err.loc) {
+          message = message.replace(/ \(\d+:\d+\)$/, '');
+        }
+
+        stylelint.utils.report({
+          ruleName,
+          result,
+          message,
+          node: root,
+          index: getIndexFromLoc(source, err.loc.start),
+        });
+
+        return;
+      }
 
       // Everything is the same. Nothing to do here;
       if (source === prettierSource) {
@@ -172,6 +201,25 @@ function omitStylelintSpecificOptions(options) {
   delete prettierOptions.message;
   delete prettierOptions.severity;
   return prettierOptions;
+}
+
+function getIndexFromLoc(source, {line, column}) {
+  function nthIndex(str, searchValue, n) {
+    let i = -1;
+    while (n-- && i++ < str.length) {
+      i = str.indexOf(searchValue, i);
+      if (i < 0) {
+        break;
+      }
+    }
+    return i;
+  }
+
+  if (line === 1) {
+    return column - 1;
+  }
+
+  return nthIndex(source, '\n', line - 1) + column;
 }
 
 module.exports.ruleName = ruleName;
