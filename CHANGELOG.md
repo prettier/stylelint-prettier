@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.6 (2019-01-05)
+
+- Report unparsable code as linting issues instead of crashing (#14)
+
 ## 1.0.5 (2018-11-16)
 
 - Specifying an explict syntax with `--syntax` will no longer crash when autofixing (#11)
