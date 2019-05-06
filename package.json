@@ -32,7 +32,8 @@
     "prettier-linter-helpers": "^1.0.0"
   },
   "peerDependencies": {
-    "prettier": ">= 0.11.0"
+    "prettier": ">= 0.11.0",
+    "stylelint": "^8.0.0 || ^9.0.0 || ^10.0.0"
   },
   "devDependencies": {
     "eslint": "^5.0.1",
