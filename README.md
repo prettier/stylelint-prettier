@@ -63,7 +63,7 @@ To integrate this plugin with `stylelint-config-prettier`, you can use the `"rec
     npm install --save-dev stylelint-config-prettier
     ```
 
-2.  Then all you need in your `.stylelintrc` is:
+2.  Then replace the plugins and rules declarations in your `.stylelintrc` that you added in the prior section with:
 
     ```json
     {
@@ -80,6 +80,9 @@ This does three things:
 You can then set Prettier's own options inside a `.prettierrc` file.
 
 ## Options
+
+_stylelint-prettier will honor your `.prettierrc` file by default_. You only
+need this section if you wish to override those settings.
 
 > Note: While it is possible to pass options to Prettier via your Stylelint configuration file, it is not recommended because editor extensions such as `prettier-atom` and `prettier-vscode` **will** read [`.prettierrc`](https://prettier.io/docs/en/configuration.html), but **won't** read settings from Stylelint, which can lead to an inconsistent experience.
 
