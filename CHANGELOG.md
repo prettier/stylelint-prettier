@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.7 (2019-05-07)
+
+- Add stylelint >9.2.1 as a peerDependency to help Yarn PNP support
+
 ## 1.0.6 (2019-01-05)
 
 - Report unparsable code as linting issues instead of crashing (#14)
