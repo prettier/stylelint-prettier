@@ -41,7 +41,7 @@
     "eslint-plugin-node": "^7.0.1",
     "eslint-plugin-prettier": "^3.0.0",
     "jest": "^23.6.0",
-    "prettier": "^1.13.7",
+    "prettier": "^1.17.0",
     "stylelint": "^9.5.0",
     "stylelint-config-prettier": "^4.0.0"
   },
