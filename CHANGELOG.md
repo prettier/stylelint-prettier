@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.0 (2019-05-12)
+
+- Do not trigger prettier for js, ts, vue, html and markdown files. In stylelint >=9.9.0 these files sometimes worked and sometimes threw errors. In stylelint >=9.10.0 they would either error or have incorrect indentation. Prettifying a subset of the file (i.e. just contents of `<style>` tags) using stylelint feels like unneeded work if you're about to run prettier over the whole file anyway (#22)
+
 ## 1.0.7 (2019-05-07)
 
 - Add stylelint >9.2.1 as a peerDependency to help Yarn PNP support
