@@ -67,6 +67,29 @@ module.exports = stylelint.createPlugin(
         initialOptions.parser = 'css';
       }
 
+      // Stylelint suppports languages that may contain multiple types of style
+      // languages, thus we can't rely on guessing the parser based off the
+      // filename.
+
+      // In all of the following cases stylelint extracts a part of a file to
+      // be formatted and there exists a prettier parser for the whole file.
+      // If you're interested in prettier you'll want a fully formatted file so
+      // you're about to run prettier over the whole file anyway.
+      // Therefore running prettier over just the style section is wasteful, so
+      // skip it.
+
+      const parserBlockList = [
+        'babel',
+        'flow',
+        'typescript',
+        'vue',
+        'markdown',
+        'html',
+      ];
+      if (parserBlockList.indexOf(prettierFileInfo.inferredParser) !== -1) {
+        return;
+      }
+
       const prettierOptions = Object.assign(
         {},
         initialOptions,

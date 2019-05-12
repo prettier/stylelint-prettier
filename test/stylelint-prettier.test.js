@@ -530,30 +530,6 @@ testRule(rule, {
   ],
 });
 
-// Invalid syntax is reported
-testRule(rule, {
-  ruleName: rule.ruleName,
-  config: [true, {trailingComma: 'all'}],
-  codeFilename: filename('default', 'dummy.js'),
-  accept: [],
-  reject: [
-    {
-      description: 'Prettier JS Invalid - Unparsable code',
-      code: `cons}t Button = styled.button\`\n  background: tomato;\n\`;`,
-      message: `Parsing error: Unexpected token`,
-      line: 1,
-      column: 5,
-    },
-    {
-      description: 'Prettier JS Invalid - Unparsable code',
-      code: `const f = 1;\nconst bar = 3;\n\nco}nst Button = styled.button\`\n  background: tomato;\n\`;`,
-      message: `Parsing error: Unexpected token`,
-      line: 4,
-      column: 3,
-    },
-  ],
-});
-
 describe('stylelint configurations', () => {
   const oldWarn = console.warn;
   beforeEach(() => {
