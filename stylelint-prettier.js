@@ -191,8 +191,8 @@ module.exports = stylelint.createPlugin(
         root.append(newRoot);
 
         // Use the EOL whitespace from the rawData, as it could be \n or \r\n
-        const trailingWhitespace = rawData.match(/[\s\uFEFF\xA0]+$/)[0];
-        if (trailingWhitespace.length) {
+        const trailingWhitespace = rawData.match(/[\s\uFEFF\xA0]+$/);
+        if (trailingWhitespace) {
           root.raws.after = trailingWhitespace[0];
         }
         return;
