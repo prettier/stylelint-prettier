@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.1 (2019-05-30)
+
+- Fix incorrect trailing whitespace on Windows (#24)
+
 ## 1.1.0 (2019-05-12)
 
 - Do not trigger prettier for js, ts, vue, html and markdown files. In stylelint >=9.9.0 these files sometimes worked and sometimes threw errors. In stylelint >=9.10.0 they would either error or have incorrect indentation. Prettifying a subset of the file (i.e. just contents of `<style>` tags) using stylelint feels like unneeded work if you're about to run prettier over the whole file anyway (#22)
