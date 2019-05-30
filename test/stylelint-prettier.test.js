@@ -530,6 +530,41 @@ testRule(rule, {
   ],
 });
 
+// EOL Tests
+testRule(rule, {
+  ruleName: rule.ruleName,
+  config: true,
+  fix: true,
+  accept: [
+    {
+      description: 'Prettier EOL Valid - UNIX',
+      code: `body {\n  font-size: 12px;\n}\np {\n  color: 'black';\n}\n`,
+    },
+    {
+      description: 'Prettier EOL Valid - Windows',
+      code: `body {\r\n  font-size: 12px;\r\n}\r\np {\r\n  color: 'black';\r\n}\r\n`,
+    },
+  ],
+  reject: [
+    {
+      description: 'Prettier EOL Invalid - UNIX',
+      code: `body {\n  font-size: 12px;\n}\np {\n  color: 'black';\n}`,
+      fixed: `body {\n  font-size: 12px;\n}\np {\n  color: 'black';\n}\n`,
+      message: `Insert \"⏎\" (prettier/prettier)`,
+      line: 6,
+      column: 2,
+    },
+    {
+      description: 'Prettier EOL Invalid - Windows',
+      code: `body {\r\n  font-size: 12px;\r\n}\r\np {\r\n  color: 'black';\r\n}`,
+      fixed: `body {\r\n  font-size: 12px;\r\n}\r\np {\r\n  color: 'black';\r\n}\r\n`,
+      message: `Insert \"␍⏎\" (prettier/prettier)`,
+      line: 6,
+      column: 2,
+    },
+  ],
+});
+
 describe('stylelint configurations', () => {
   const oldWarn = console.warn;
   beforeEach(() => {
