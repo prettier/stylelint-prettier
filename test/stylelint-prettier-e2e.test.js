@@ -1,5 +1,6 @@
 const {spawnSync} = require('child_process');
 const {resolve} = require('path');
+const stripAnsi = require('strip-ansi');
 
 describe('E2E Tests', () => {
   test('CSS/SCSS files', () => {
@@ -49,6 +50,6 @@ function runStylelint(pattern) {
 
   return {
     status: result.status,
-    output: result.stdout.toString().trim(),
+    output: stripAnsi(result.stdout.toString().trim()),
   };
 }

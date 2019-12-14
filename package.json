@@ -36,14 +36,15 @@
     "stylelint": ">= 9.2.1"
   },
   "devDependencies": {
-    "eslint": "^5.0.1",
-    "eslint-config-prettier": "^3.1.0",
-    "eslint-plugin-node": "^7.0.1",
-    "eslint-plugin-prettier": "^3.0.0",
-    "jest": "^23.6.0",
-    "prettier": "^1.17.0",
+    "eslint": "^6.7.0",
+    "eslint-config-prettier": "^6.7.0",
+    "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-prettier": "^3.1.1",
+    "jest": "^24.9.0",
+    "prettier": "^1.19.1",
+    "strip-ansi": "^6.0.0",
     "stylelint": "^9.5.0",
-    "stylelint-config-prettier": "^4.0.0"
+    "stylelint-config-prettier": "^7.0.0"
   },
   "engines": {
     "node": ">=6"
