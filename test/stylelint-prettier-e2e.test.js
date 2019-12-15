@@ -32,7 +32,7 @@ check.invalid.scss
    * Don't act upon CSS-in-JS files
    */
   test('CSS-in-JS files', () => {
-    const result = runStylelint('*.js');
+    const result = runStylelint('*.{js,jsx,tsx}');
 
     const expectedResult = ``;
 
