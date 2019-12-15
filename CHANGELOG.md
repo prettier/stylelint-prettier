@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.2 (2019-12-14)
+
+- Account for user defined parser overrides when working out what files to skip (#39)
+- Add an extra check to quickly skip formatting CSS-in-JS object literals (#39)
+- Bump dev dependencies (#39)
+
 ## 1.1.1 (2019-05-30)
 
 - Fix incorrect trailing whitespace on Windows (#24)
