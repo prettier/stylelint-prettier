@@ -29,6 +29,12 @@ module.exports = stylelint.createPlugin(
         return;
       }
 
+      // Stylelint can handle css-in-js, in which it formats object literals.
+      // We don't want to run these extracts of JS through prettier
+      if (root.source.lang === 'object-literal') {
+        return;
+      }
+
       const stylelintPrettierOptions = omitStylelintSpecificOptions(options);
 
       if (!prettier) {
