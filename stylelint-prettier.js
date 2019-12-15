@@ -55,7 +55,10 @@ module.exports = stylelint.createPlugin(
       //prettier.getFileInfo was added in v1.13
       const prettierFileInfo =
         prettier.getFileInfo && prettier.getFileInfo.sync
-          ? prettier.getFileInfo.sync(filepath, {ignorePath: '.prettierignore'})
+          ? prettier.getFileInfo.sync(filepath, {
+              resolveConfig: true,
+              ignorePath: '.prettierignore',
+            })
           : {ignored: false, inferredParser: null};
 
       // Skip if file is ignored using a .prettierignore file
