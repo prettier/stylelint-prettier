@@ -51,19 +51,13 @@ Then, in your `.stylelintrc`:
 
 ## Recommended Configuration
 
-This plugin works best if you disable all other Stylelint rules relating to code formatting, and only enable rules that detect patterns in the AST. (If another active Stylelint rule disagrees with `prettier` about how code should be formatted, it will be impossible to avoid lint errors.) You can use [stylelint-config-prettier](https://github.com/prettier/stylelint-config-prettier) to disable all formatting-related Stylelint rules.
+This plugin works best if you disable all other Stylelint rules relating to code formatting, and only enable rules that detect patterns in the AST. (If another active Stylelint rule disagrees with `prettier` about how code should be formatted, it will be impossible to avoid lint errors.)
 
 If your desired formatting does not match the `prettier` output, you should use a different tool such as [prettier-stylelint](https://github.com/hugomrdias/prettier-stylelint) instead.
 
 To integrate this plugin with `stylelint-config-prettier`, you can use the `"recommended"` configuration:
 
-1.  In addition to the above installation instructions, install `stylelint-config-prettier`:
-
-    ```sh
-    npm install --save-dev stylelint-config-prettier
-    ```
-
-2.  Then replace the plugins and rules declarations in your `.stylelintrc` that you added in the prior section with:
+1.  Replace the plugins and rules declarations in your `.stylelintrc` that you added in the prior section with:
 
     ```json
     {
@@ -78,6 +72,8 @@ This does three things:
 3.  Extends the `stylelint-config-prettier` configuration.
 
 You can then set Prettier's own options inside a `.prettierrc` file.
+
+You can alternatively use [stylelint-config-prettier](https://github.com/prettier/stylelint-config-prettier) to disable all formatting-related Stylelint rules.
 
 ## Options
 

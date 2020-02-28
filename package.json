@@ -29,7 +29,8 @@
   },
   "homepage": "https://github.com/prettier/stylelint-prettier#readme",
   "dependencies": {
-    "prettier-linter-helpers": "^1.0.0"
+    "prettier-linter-helpers": "^1.0.0",
+    "stylelint-config-prettier": "^7.0.0"
   },
   "peerDependencies": {
     "prettier": ">= 0.11.0",
@@ -43,8 +44,7 @@
     "jest": "^24.9.0",
     "prettier": "^1.19.1",
     "strip-ansi": "^6.0.0",
-    "stylelint": "^9.5.0",
-    "stylelint-config-prettier": "^7.0.0"
+    "stylelint": "^9.5.0"
   },
   "engines": {
     "node": ">=6"
