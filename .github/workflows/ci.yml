@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+jobs:
+  ci:
+    name: 'Test: Node ${{ matrix.node-version }} - Stylelint ${{ matrix.stylelint-version }}'
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        stylelint-version: [13.x, 12.x, 11.x, 10.x, 9.5.x]
+        node-version: [14.x, 12.x, 10.x, 8.x]
+
+        exclude:
+          # stylelint 13 does not support node 8
+          - stylelint-version: 13.x
+            node-version: 8.x
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Use Stylelint ${{ matrix.stylelint-version }}
+        run: yarn upgrade stylelint@${{ matrix.stylelint-version }}
+
+      - name: Install
+        run: yarn install
+
+      - name: Test
+        run: yarn run test
