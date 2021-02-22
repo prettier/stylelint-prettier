@@ -3,13 +3,22 @@ const {resolve} = require('path');
 const stripAnsi = require('strip-ansi');
 
 describe('E2E Tests', () => {
-  test('CSS/SCSS files', () => {
-    const result = runStylelint('*.{css,scss}');
+  test('CSS files', () => {
+    const result = runStylelint('*.css');
 
     const expectedResult = `
 check.invalid.css
  2:25  ✖  Replace ""x"" with "'x'"   prettier/prettier
+`.trim();
 
+    expect(result.output).toEqual(expectedResult);
+    expect(result.status).toEqual(2);
+  });
+
+  test('SCSS files', () => {
+    const result = runStylelint('*.scss');
+
+    const expectedResult = `
 check.invalid.scss
  2:25  ✖  Replace ""x"" with "'x'"   prettier/prettier
  8:14  ✖  Insert ","                 prettier/prettier
@@ -33,6 +42,15 @@ check.invalid.scss
    */
   test('CSS-in-JS files', () => {
     const result = runStylelint('*.{js,jsx,tsx}');
+
+    const expectedResult = ``;
+
+    expect(result.output).toEqual(expectedResult);
+    expect(result.status).toEqual(0);
+  });
+
+  test('Svelte files', () => {
+    const result = runStylelint('*.svelte');
 
     const expectedResult = ``;
 

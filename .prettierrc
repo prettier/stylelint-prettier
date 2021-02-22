@@ -2,5 +2,14 @@
   "arrowParens": "always",
   "singleQuote": true,
   "trailingComma": "es5",
-  "bracketSpacing": false
+  "bracketSpacing": false,
+  "endOfLine": "auto",
+  "overrides": [
+    {
+      "files": "*.angular.html",
+      "options": {
+        "parser": "angular"
+      }
+    }
+  ]
 }

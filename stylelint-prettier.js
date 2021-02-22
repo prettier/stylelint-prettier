@@ -76,7 +76,7 @@ module.exports = stylelint.createPlugin(
         initialOptions.parser = 'css';
       }
 
-      // Stylelint suppports languages that may contain multiple types of style
+      // Stylelint supports languages that may contain multiple types of style
       // languages, thus we can't rely on guessing the parser based off the
       // filename.
 
@@ -94,6 +94,8 @@ module.exports = stylelint.createPlugin(
         'vue',
         'markdown',
         'html',
+        'angular',
+        'svelte', // https://github.com/sveltejs/prettier-plugin-svelte/issues/210
       ];
       if (parserBlockList.indexOf(prettierFileInfo.inferredParser) !== -1) {
         return;
@@ -116,7 +118,7 @@ module.exports = stylelint.createPlugin(
         let message = 'Parsing error: ' + err.message;
 
         // Prettier's message contains a codeframe style preview of the
-        // invalid code and the line/column at which the error occured.
+        // invalid code and the line/column at which the error occurred.
         // ESLint shows those pieces of information elsewhere already so
         // remove them from the message
         if (err.codeFrame) {
@@ -190,7 +192,7 @@ module.exports = stylelint.createPlugin(
         const syntax = root.source.syntax || result.opts.syntax;
         const newRoot = syntax.parse(rawData);
 
-        // For reasons I don't really undersand, when the original input does
+        // For reasons I don't really understand, when the original input does
         // not have a trailing newline, newRoot generates a trailing newline but
         // it does not get included in the output.
         // Cleaning the root raws (to remove any existing whitespace), then
