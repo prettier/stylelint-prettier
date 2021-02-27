@@ -191,7 +191,7 @@ testRule(rule, {
 // Testing Comments
 testRule(rule, {
   ruleName: rule.ruleName,
-  config: true,
+  config: [true, {endOfLine: 'auto'}],
   codeFilename: filename('default'),
   fix: true,
 
@@ -533,7 +533,7 @@ testRule(rule, {
 // EOL Tests
 testRule(rule, {
   ruleName: rule.ruleName,
-  config: true,
+  config: [true, {endOfLine: 'auto'}],
   fix: true,
   accept: [
     {
