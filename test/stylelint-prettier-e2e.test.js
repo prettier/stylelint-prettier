@@ -2,14 +2,29 @@ const {spawnSync} = require('child_process');
 const {resolve} = require('path');
 const stripAnsi = require('strip-ansi');
 
+/**
+ * Tests that report errors in multiple files may change the order of the files
+ * across multiple runs.
+ * To avoid flaky tests, assert the reporting of errors in one file only per
+ * test case. Asserting no errors are reported across multiple files is ok.
+ */
 describe('E2E Tests', () => {
-  test('CSS/SCSS files', () => {
-    const result = runStylelint('*.{css,scss}');
+  test('CSS files', () => {
+    const result = runStylelint('*.css');
 
     const expectedResult = `
 check.invalid.css
  2:25  ✖  Replace ""x"" with "'x'"   prettier/prettier
+`.trim();
 
+    expect(result.output).toEqual(expectedResult);
+    expect(result.status).toEqual(2);
+  });
+
+  test('SCSS files', () => {
+    const result = runStylelint('*.scss');
+
+    const expectedResult = `
 check.invalid.scss
  2:25  ✖  Replace ""x"" with "'x'"   prettier/prettier
  8:14  ✖  Insert ","                 prettier/prettier
@@ -19,6 +34,10 @@ check.invalid.scss
     expect(result.status).toEqual(2);
   });
 
+  /**
+   * Don't act upon html-like files, as prettier already handles them as whole
+   * files
+   */
   test('HTML/Markdown/Vue files', () => {
     const result = runStylelint('*.{html,md,vue}');
 
@@ -29,7 +48,8 @@ check.invalid.scss
   });
 
   /**
-   * Don't act upon CSS-in-JS files
+   * Don't act upon CSS-in-JS files, as prettier already handles them as whole
+   * files
    */
   test('CSS-in-JS files', () => {
     const result = runStylelint('*.{js,jsx,tsx}');
