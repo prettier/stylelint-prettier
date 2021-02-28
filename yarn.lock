@@ -3561,6 +3561,11 @@ prettier-linter-helpers@^1.0.0:
   dependencies:
     fast-diff "^1.1.2"
 
+prettier-plugin-svelte@^2.1.6:
+  version "2.1.6"
+  resolved "https://registry.yarnpkg.com/prettier-plugin-svelte/-/prettier-plugin-svelte-2.1.6.tgz#ae10e16d89c94c72a937574eb840501104ff4565"
+  integrity sha512-eg6MhH394IYsljIcLMgCx/wozObkUFZJ1GkH+Nj8sZQilnNCFTeSBcEohBaNa9hr5RExvlJQJ8a2CEjMMrwL8g==
+
 prettier@^1.19.1:
   version "1.19.1"
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.19.1.tgz#f7d7f5ff8a9cd872a7be4ca142095956a60797cb"
@@ -4332,6 +4337,11 @@ supports-color@^6.1.0:
   integrity sha512-qe1jfm1Mg7Nq/NSh6XE24gPXROEVsWHxC1LIx//XNlD9iw7YZQGjZNjYN7xGaEG6iKdA8EtNFW6R0gjnVXp+wQ==
   dependencies:
     has-flag "^3.0.0"
+
+svelte@^3.34.0:
+  version "3.34.0"
+  resolved "https://registry.yarnpkg.com/svelte/-/svelte-3.34.0.tgz#a0195a0db0305d78df87520711317b99e6fb8a26"
+  integrity sha512-xWcaQ/J4Yd5k0UWz+ef6i5RW5WP3hNpluEI2qtTTKlMOXERHpVL509O9lIw7sgEn1JjJgTOS+lnnDj99vQ3YqQ==
 
 svg-tags@^1.0.0:
   version "1.0.0"
