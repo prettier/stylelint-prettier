@@ -94,6 +94,8 @@ module.exports = stylelint.createPlugin(
         'vue',
         'markdown',
         'html',
+        'angular', // .component.html files
+        'svelte',
       ];
       if (parserBlockList.indexOf(prettierFileInfo.inferredParser) !== -1) {
         return;
