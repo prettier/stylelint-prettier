@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.0 (2021-02-27)
+
+- Do not trigger prettier for .svelte and .component.html (angular) files. This avoids errors. Prettifying a subset of the file (i.e. just contents of `<style>` tags) using stylelint feels like unneeded work if you're about to run prettier over the whole file anyway (#160)
+
 ## 1.1.2 (2019-12-14)
 
 - Account for user defined parser overrides when working out what files to skip (#39)
