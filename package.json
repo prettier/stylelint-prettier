@@ -44,7 +44,7 @@
     "prettier": "^1.19.1",
     "prettier-plugin-svelte": "^2.1.6",
     "strip-ansi": "^6.0.0",
-    "stylelint": "^9.5.0",
+    "stylelint": "^13.13.0",
     "stylelint-config-prettier": "^7.0.0",
     "svelte": "^3.34.0"
   },
