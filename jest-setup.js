@@ -1,120 +1,201 @@
-const stylelint = require('stylelint');
+const util = require('util');
+const {basicChecks, lint} = require('stylelint');
 
-global.testRule = (rule, schema) => {
-  expect.extend({
-    toHaveMessage(testCase) {
-      if (testCase.message === undefined) {
-        return {
-          message: () =>
-            'Expected "reject" test case to have a "message" property',
-          pass: false,
-        };
+global.testRule = getTestRule({plugins: ['./']});
+
+/**
+ * @typedef {Object} TestCase
+ * @property {string} code
+ * @property {string} [description]
+ * @property {boolean} [only]
+ * @property {boolean} [skip]
+ */
+
+/**
+ * @typedef {Object} TestSchema
+ * @property {string} ruleName
+ * @property {any} config
+ * @property {TestCase[]} accept
+ * @property {TestCase[]} reject
+ * @property {string | string[]} plugins
+ * @property {boolean} [skipBasicChecks]
+ * @property {boolean} [fix]
+ * @property {Syntax} [customSyntax] - PostCSS Syntax (https://postcss.org/api/#syntax)
+ * @property {boolean} [only]
+ * @property {boolean} [skip]
+ */
+
+function getTestRule(options = {}) {
+  /**
+   * @param {TestSchema} schema
+   */
+  return function testRule(schema) {
+    describe(`${schema.ruleName}`, () => {
+      const stylelintConfig = {
+        plugins: options.plugins || schema.plugins,
+        rules: {
+          [schema.ruleName]: schema.config,
+        },
+      };
+
+      let passingTestCases = schema.accept || [];
+
+      if (!schema.skipBasicChecks) {
+        passingTestCases = passingTestCases.concat(basicChecks);
       }
 
-      return {
-        pass: true,
-      };
-    },
-  });
+      setupTestCases({
+        name: 'accept',
+        cases: passingTestCases,
+        schema,
+        comparisons: (testCase) => async () => {
+          const stylelintOptions = {
+            code: testCase.code,
+            config: stylelintConfig,
+            customSyntax: schema.customSyntax,
+            codeFilename: schema.codeFilename,
+          };
 
-  describe(schema.ruleName, () => {
-    const stylelintConfig = {
-      plugins: ['./'],
-      rules: {
-        [schema.ruleName]: schema.config,
+          const output = await lint(stylelintOptions);
+
+          expect(output.results[0].warnings).toEqual([]);
+          expect(output.results[0].parseErrors).toEqual([]);
+
+          if (!schema.fix) return;
+
+          // Check that --fix doesn't change code
+          const outputAfterFix = await lint({...stylelintOptions, fix: true});
+          const fixedCode = getOutputCss(outputAfterFix);
+
+          expect(fixedCode).toBe(testCase.code);
+        },
+      });
+
+      setupTestCases({
+        name: 'reject',
+        cases: schema.reject,
+        schema,
+        comparisons: (testCase) => async () => {
+          const stylelintOptions = {
+            code: testCase.code,
+            config: stylelintConfig,
+            customSyntax: schema.customSyntax,
+            codeFilename: schema.codeFilename,
+          };
+
+          const outputAfterLint = await lint(stylelintOptions);
+
+          const actualWarnings = outputAfterLint.results[0].warnings;
+
+          expect(outputAfterLint.results[0].parseErrors).toEqual([]);
+          expect(actualWarnings).toHaveLength(
+            testCase.warnings ? testCase.warnings.length : 1
+          );
+
+          (testCase.warnings || [testCase]).forEach((expected, i) => {
+            const warning = actualWarnings[i];
+
+            expect(expected).toHaveMessage();
+
+            expect(warning.text).toBe(expected.message);
+
+            if (expected.line !== undefined) {
+              expect(warning.line).toBe(expected.line);
+            }
+
+            if (expected.column !== undefined) {
+              expect(warning.column).toBe(expected.column);
+            }
+          });
+
+          if (!schema.fix) return;
+
+          // Check that --fix doesn't change code
+          if (
+            schema.fix &&
+            !testCase.fixed &&
+            testCase.fixed !== '' &&
+            !testCase.unfixable
+          ) {
+            throw new Error(
+              'If using { fix: true } in test schema, all reject cases must have { fixed: .. }'
+            );
+          }
+
+          const outputAfterFix = await lint({...stylelintOptions, fix: true});
+
+          const fixedCode = getOutputCss(outputAfterFix);
+
+          if (!testCase.unfixable) {
+            expect(fixedCode).toBe(testCase.fixed);
+            expect(fixedCode).not.toBe(testCase.code);
+          } else {
+            // can't fix
+            if (testCase.fixed) {
+              expect(fixedCode).toBe(testCase.fixed);
+            }
+
+            expect(fixedCode).toBe(testCase.code);
+          }
+
+          // Checks whether only errors other than those fixed are reported
+          const outputAfterLintOnFixedCode = await lint({
+            ...stylelintOptions,
+            code: fixedCode,
+          });
+
+          expect(outputAfterLintOnFixedCode.results[0].warnings).toEqual(
+            outputAfterFix.results[0].warnings
+          );
+          expect(outputAfterLintOnFixedCode.results[0].parseErrors).toEqual([]);
+        },
+      });
+    });
+
+    expect.extend({
+      toHaveMessage(testCase) {
+        if (testCase.message === undefined) {
+          return {
+            message: () =>
+              'Expected "reject" test case to have a "message" property',
+            pass: false,
+          };
+        }
+
+        return {
+          pass: true,
+        };
       },
-    };
+    });
+  };
+}
 
-    if (schema.accept && schema.accept.length) {
-      describe('accept', () => {
-        schema.accept.forEach((testCase) => {
-          const spec = testCase.only ? it.only : it;
+function setupTestCases({name, cases, schema, comparisons}) {
+  if (cases && cases.length) {
+    const testGroup = schema.only
+      ? describe.only
+      : schema.skip
+      ? describe.skip
+      : describe;
 
-          spec(testCase.description || 'no description', () => {
-            const options = {
-              code: testCase.code,
-              config: stylelintConfig,
-              customSyntax: schema.customSyntax,
-              codeFilename: schema.codeFilename,
-            };
+    testGroup(`${name}`, () => {
+      cases.forEach((testCase) => {
+        if (testCase) {
+          const spec = testCase.only ? it.only : testCase.skip ? it.skip : it;
 
-            return stylelint.lint(options).then((output) => {
-              expect(output.results[0].warnings).toEqual([]);
-              if (!schema.fix) {
-                return;
-              }
-
-              // Check the fix
-              return stylelint
-                .lint(Object.assign({fix: true}, options))
-                .then((output2) => {
-                  const fixedCode = getOutputCss(output2);
-
-                  expect(fixedCode).toBe(testCase.code);
-                });
+          describe(`${util.inspect(schema.config)}`, () => {
+            describe(`${util.inspect(testCase.code)}`, () => {
+              spec(
+                testCase.description || 'no description',
+                comparisons(testCase)
+              );
             });
           });
-        });
+        }
       });
-    }
-
-    if (schema.reject && schema.reject.length) {
-      describe('reject', () => {
-        schema.reject.forEach((testCase) => {
-          const spec = testCase.only ? it.only : it;
-
-          spec(testCase.description || 'no description', () => {
-            const options = {
-              code: testCase.code,
-              config: stylelintConfig,
-              customSyntax: schema.customSyntax,
-              codeFilename: schema.codeFilename,
-            };
-
-            return stylelint.lint(options).then((output) => {
-              const warnings = output.results[0].warnings;
-              const warning = warnings[0];
-
-              expect(warnings.length).toBeGreaterThanOrEqual(1);
-              // expect(testCase).toHaveMessage();
-
-              if (testCase.message !== undefined) {
-                expect(warning.text).toBe(testCase.message);
-              }
-
-              if (testCase.line !== undefined) {
-                expect(warning.line).toBe(testCase.line);
-              }
-
-              if (testCase.column !== undefined) {
-                expect(warning.column).toBe(testCase.column);
-              }
-
-              if (!schema.fix) {
-                return;
-              }
-
-              if (!testCase.fixed) {
-                throw new Error(
-                  'If using { fix: true } in test schema, all reject cases must have { fixed: .. }'
-                );
-              }
-
-              // Check the fix
-              return stylelint
-                .lint(Object.assign({fix: true}, options))
-                .then((output2) => {
-                  const fixedCode = getOutputCss(output2);
-
-                  expect(fixedCode).toBe(testCase.fixed);
-                });
-            });
-          });
-        });
-      });
-    }
-  });
-};
+    });
+  }
+}
 
 function getOutputCss(output) {
   const result = output.results[0]._postcssResult;
@@ -122,39 +203,3 @@ function getOutputCss(output) {
 
   return css;
 }
-
-global.testConfig = (input) => {
-  let testFn;
-
-  if (input.only) {
-    testFn = test.only;
-  } else if (input.skip) {
-    testFn = test.skip;
-  } else {
-    testFn = test;
-  }
-
-  testFn(input.description, () => {
-    const config = {
-      plugins: ['./'],
-      rules: {
-        [input.ruleName]: input.config,
-      },
-    };
-
-    return stylelint
-      .lint({
-        code: '',
-        config,
-      })
-      .then((data) => {
-        const invalidOptionWarnings = data.results[0].invalidOptionWarnings;
-
-        if (input.valid) {
-          expect(invalidOptionWarnings.length).toBe(0);
-        } else {
-          expect(invalidOptionWarnings[0].text).toBe(input.message);
-        }
-      });
-  });
-};

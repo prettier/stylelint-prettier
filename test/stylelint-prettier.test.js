@@ -1,10 +1,10 @@
 const path = require('path');
-const rule = require('..');
+const {ruleName} = require('..');
 const stylelint = require('stylelint');
 
 // Reading from default .prettierrc
-testRule(rule, {
-  ruleName: rule.ruleName,
+testRule({
+  ruleName,
   config: true,
   codeFilename: filename('default'),
   fix: true,
@@ -45,8 +45,8 @@ testRule(rule, {
 });
 
 // Reading from custom .prettierrc
-testRule(rule, {
-  ruleName: rule.ruleName,
+testRule({
+  ruleName,
   config: true,
   codeFilename: filename('custom'),
   fix: true,
@@ -87,8 +87,8 @@ testRule(rule, {
 });
 
 // Merging options from config into .prettierrc
-testRule(rule, {
-  ruleName: rule.ruleName,
+testRule({
+  ruleName,
   config: [true, {tabWidth: 8}],
   codeFilename: filename('default'),
   fix: true,
@@ -129,8 +129,8 @@ testRule(rule, {
 });
 
 // Use the css parser if no filename was specified
-testRule(rule, {
-  ruleName: rule.ruleName,
+testRule({
+  ruleName,
   config: true,
   fix: true,
 
@@ -153,8 +153,8 @@ testRule(rule, {
 });
 
 // Use the parser specified in overrides in .prettierrc
-testRule(rule, {
-  ruleName: rule.ruleName,
+testRule({
+  ruleName,
   config: true,
   codeFilename: filename('default', 'dummy.wxss'),
   accept: [
@@ -176,8 +176,8 @@ testRule(rule, {
 });
 
 // Ignoring files in .prettierignore
-testRule(rule, {
-  ruleName: rule.ruleName,
+testRule({
+  ruleName,
   config: true,
   codeFilename: filename('default', 'ignore-me.css'),
   accept: [
@@ -189,8 +189,8 @@ testRule(rule, {
 });
 
 // Testing Comments
-testRule(rule, {
-  ruleName: rule.ruleName,
+testRule({
+  ruleName,
   config: [true, {endOfLine: 'auto'}],
   codeFilename: filename('default'),
   fix: true,
@@ -304,8 +304,8 @@ const stressTestCssExpected = `.foo {
 }
 `;
 
-testRule(rule, {
-  ruleName: rule.ruleName,
+testRule({
+  ruleName,
   config: true,
   codeFilename: filename('default'),
   fix: true,
@@ -321,9 +321,69 @@ testRule(rule, {
       description: 'Prettier Insert/Replace/Delete - Stress Test',
       code: stressTestCssInput,
       fixed: stressTestCssExpected,
-      message: `Delete ";;;;;;;" (prettier/prettier)`,
-      line: 2,
-      column: 18,
+      warnings: [
+        {
+          message: `Delete ";;;;;;;" (prettier/prettier)`,
+          line: 2,
+          column: 18,
+        },
+        {
+          message:
+            'Replace ".first:after{color:·red;content:·"beep";" with "⏎.first:after·{⏎··color:·red;⏎··content:·\'beep\';⏎" (prettier/prettier)',
+          line: 5,
+          column: 14,
+        },
+        {
+          message: 'Insert "··" (prettier/prettier)',
+          line: 8,
+          column: 1,
+        },
+        {
+          message:
+            'Replace "content:·"beep"" with "··content:·\'beep\'" (prettier/prettier)',
+          line: 9,
+          column: 1,
+        },
+        {
+          message:
+            'Replace ".final:after{color:·blue;content:·"shift";}" with "⏎.final:after·{⏎··color:·blue;⏎··content:·\'shift\';" (prettier/prettier)',
+          line: 12,
+          column: 14,
+        },
+        {
+          message: 'Insert "}" (prettier/prettier)',
+          line: 13,
+          column: 1,
+        },
+        {
+          message: 'Insert "··" (prettier/prettier)',
+          line: 16,
+          column: 1,
+        },
+        {
+          message:
+            'Replace ".ham{display:inline" with "⏎.ham·{⏎··display:·inline;⏎" (prettier/prettier)',
+          line: 17,
+          column: 2,
+        },
+        {
+          message:
+            'Replace "····display:·block;;;;;;;;" with "··display:·block;" (prettier/prettier)',
+          line: 20,
+          column: 1,
+        },
+        {
+          message: 'Delete "⏎" (prettier/prettier)',
+          line: 21,
+          column: 2,
+        },
+        {
+          message:
+            'Replace ".final:after{color:·blue;content:·"shift";" with "⏎.final:after·{⏎··color:·blue;⏎··content:·\'shift\';⏎" (prettier/prettier)',
+          line: 24,
+          column: 14,
+        },
+      ],
     },
   ],
 });
@@ -457,8 +517,8 @@ $pip-animation: (
 }
 `;
 
-testRule(rule, {
-  ruleName: rule.ruleName,
+testRule({
+  ruleName,
   config: true,
   codeFilename: filename('default', 'dummy.scss'),
   customSyntax: 'postcss-scss',
@@ -475,16 +535,31 @@ testRule(rule, {
       description: 'Prettier Insert/Replace/Delete - Scss Stress Test',
       code: stressTestScssInput,
       fixed: stressTestScssExpected,
-      message: `Delete ";;" (prettier/prettier)`,
-      line: 1,
-      column: 18,
+      warnings: [
+        {
+          message: `Delete ";;" (prettier/prettier)`,
+          line: 1,
+          column: 18,
+        },
+        {
+          message: 'Insert "," (prettier/prettier)',
+          line: 33,
+          column: 22,
+        },
+        {
+          message:
+            'Replace "transform:·scale(0.85)" with "⏎····transform:·scale(0.85);⏎··" (prettier/prettier)',
+          line: 43,
+          column: 53,
+        },
+      ],
     },
   ],
 });
 
 // Test trailing commas in near-empty scss files
-testRule(rule, {
-  ruleName: rule.ruleName,
+testRule({
+  ruleName,
   config: [true, {trailingComma: 'all'}],
   codeFilename: filename('default', 'dummy.scss'),
   customSyntax: 'postcss-scss',
@@ -509,8 +584,8 @@ testRule(rule, {
 });
 
 // Passing a syntax works
-testRule(rule, {
-  ruleName: rule.ruleName,
+testRule({
+  ruleName,
   config: [true, {parser: 'scss', trailingComma: 'all'}],
   customSyntax: 'postcss-scss',
   fix: true,
@@ -533,8 +608,8 @@ testRule(rule, {
 });
 
 // EOL Tests
-testRule(rule, {
-  ruleName: rule.ruleName,
+testRule({
+  ruleName,
   config: [true, {endOfLine: 'auto'}],
   fix: true,
   accept: [
