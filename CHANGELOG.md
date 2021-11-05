@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.0.0 (2021-11-05)
+
+Increase the minimum required versions of `stylelint`, `prettier` and `node`. No code changes have been required and v1.2.0 works with stylelint v14, however continuing to test old these old unsupported versions is getting more difficult thanks to internal API changes. (#198)
+
+- Minimum stylelint version is now v14 (drop support for v9.5 through v13.x)
+- Minimum prettier version is now v2 (drop support for v1.x)
+- Minimum node requirements is now ^12.22.0 || ^14.17.0 || >=16.0.0 (drop support for v8.x and v10.x)
+
 ## 1.2.0 (2021-02-27)
 
 - Do not trigger prettier for .svelte and .component.html (angular) files. This avoids errors. Prettifying a subset of the file (i.e. just contents of `<style>` tags) using stylelint feels like unneeded work if you're about to run prettier over the whole file anyway (#160)
