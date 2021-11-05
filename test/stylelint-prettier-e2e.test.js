@@ -14,7 +14,7 @@ describe('E2E Tests', () => {
 
     const expectedResult = `
 check.invalid.css
- 2:25  ✖  Replace ""x"" with "'x'"   prettier/prettier
+ 2:25  ✖  Replace ""x"" with "'x'"  prettier/prettier
 `.trim();
 
     expect(result.output).toEqual(expectedResult);
@@ -26,8 +26,8 @@ check.invalid.css
 
     const expectedResult = `
 check.invalid.scss
- 2:25  ✖  Replace ""x"" with "'x'"   prettier/prettier
- 8:14  ✖  Insert ","                 prettier/prettier
+ 2:25  ✖  Replace ""x"" with "'x'"  prettier/prettier
+ 8:14  ✖  Insert ","                prettier/prettier
 `.trim();
 
     expect(result.output).toEqual(expectedResult);
@@ -71,5 +71,6 @@ function runStylelint(pattern) {
   return {
     status: result.status,
     output: stripAnsi(result.stdout.toString().trim()),
+    error: stripAnsi(result.stderr.toString().trim()),
   };
 }

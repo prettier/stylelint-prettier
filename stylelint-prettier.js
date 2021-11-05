@@ -47,19 +47,14 @@ module.exports = stylelint.createPlugin(
       const filepath = root.source.input.file || '<input>';
       const source = root.source.input.css;
 
-      const prettierRcOptions =
-        prettier.resolveConfig && prettier.resolveConfig.sync
-          ? prettier.resolveConfig.sync(filepath, {editorconfig: true})
-          : null;
+      const prettierRcOptions = prettier.resolveConfig.sync(filepath, {
+        editorconfig: true,
+      });
 
-      //prettier.getFileInfo was added in v1.13
-      const prettierFileInfo =
-        prettier.getFileInfo && prettier.getFileInfo.sync
-          ? prettier.getFileInfo.sync(filepath, {
-              resolveConfig: true,
-              ignorePath: '.prettierignore',
-            })
-          : {ignored: false, inferredParser: null};
+      const prettierFileInfo = prettier.getFileInfo.sync(filepath, {
+        resolveConfig: true,
+        ignorePath: '.prettierignore',
+      });
 
       // Skip if file is ignored using a .prettierignore file
       if (prettierFileInfo.ignored) {
