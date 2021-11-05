@@ -11,18 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        stylelint-version: [13.x, 12.x, 11.x, 10.x, 9.5.x]
-        prettier-version: [1.x, 2.x]
-        node-version: [14.x, 12.x, 10.x, 8.x]
-
-        exclude:
-          # stylelint 13 does not support node 8
-          - stylelint-version: 13.x
-            node-version: 8.x
-
-          # prettier 2 does not support node 8
-          - prettier-version: 2.x
-            node-version: 8.x
+        stylelint-version: [14.x]
+        node-version: [16.x, 14.x, 12.x]
 
     steps:
       - uses: actions/checkout@v2
@@ -34,9 +24,6 @@ jobs:
 
       - name: Use Stylelint ${{ matrix.stylelint-version }}
         run: yarn upgrade stylelint@${{ matrix.stylelint-version }}
-
-      - name: Use Prettier ${{ matrix.prettier-version }}
-        run: yarn upgrade prettier@${{ matrix.prettier-version }}
 
       - name: Install
         run: yarn install

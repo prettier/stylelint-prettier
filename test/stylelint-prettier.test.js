@@ -461,6 +461,7 @@ testRule(rule, {
   ruleName: rule.ruleName,
   config: true,
   codeFilename: filename('default', 'dummy.scss'),
+  customSyntax: 'postcss-scss',
   fix: true,
 
   accept: [
@@ -486,6 +487,7 @@ testRule(rule, {
   ruleName: rule.ruleName,
   config: [true, {trailingComma: 'all'}],
   codeFilename: filename('default', 'dummy.scss'),
+  customSyntax: 'postcss-scss',
   fix: true,
 
   accept: [
@@ -510,7 +512,7 @@ testRule(rule, {
 testRule(rule, {
   ruleName: rule.ruleName,
   config: [true, {parser: 'scss', trailingComma: 'all'}],
-  syntax: 'scss',
+  customSyntax: 'postcss-scss',
   fix: true,
   accept: [
     {

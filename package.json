@@ -32,24 +32,30 @@
     "prettier-linter-helpers": "^1.0.0"
   },
   "peerDependencies": {
-    "prettier": ">= 0.11.0",
-    "stylelint": ">= 9.2.1"
+    "prettier": ">=2.0.0",
+    "stylelint": ">=14.0.0"
   },
   "devDependencies": {
-    "eslint": "^6.7.0",
-    "eslint-config-prettier": "^6.7.0",
-    "eslint-plugin-node": "^10.0.0",
-    "eslint-plugin-prettier": "^3.1.1",
-    "jest": "^24.9.0",
-    "prettier": "^1.19.1",
-    "prettier-plugin-svelte": "^2.1.6",
+    "@stylelint/postcss-css-in-js": "^0.37.2",
+    "eslint": "^8.1.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "jest": "^27.3.1",
+    "postcss": "^8.3.11",
+    "postcss-html": "^1.2.0",
+    "postcss-markdown": "^1.1.0",
+    "postcss-scss": "^4.0.2",
+    "postcss-syntax": "^0.36.2",
+    "prettier": "^2.4.1",
+    "prettier-plugin-svelte": "^2.4.0",
     "strip-ansi": "^6.0.0",
-    "stylelint": "^9.5.0",
-    "stylelint-config-prettier": "^7.0.0",
+    "stylelint": "^14.0.0",
+    "stylelint-config-prettier": "^9.0.3",
     "svelte": "^3.34.0"
   },
   "engines": {
-    "node": ">=6"
+    "node": "^12.22.0 || ^14.17.0 || >=16.0.0"
   },
   "jest": {
     "setupFiles": [
