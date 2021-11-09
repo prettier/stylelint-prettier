@@ -42,6 +42,7 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^4.0.0",
     "jest": "^27.3.1",
+    "jest-preset-stylelint": "^4.2.0",
     "postcss": "^8.3.11",
     "postcss-html": "^1.2.0",
     "postcss-markdown": "^1.1.0",
@@ -58,6 +59,7 @@
     "node": "^12.22.0 || ^14.17.0 || >=16.0.0"
   },
   "jest": {
+    "preset": "jest-preset-stylelint",
     "setupFiles": [
       "./jest-setup.js"
     ]
