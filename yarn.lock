@@ -2957,14 +2957,14 @@ postcss-html@^1.2.0:
     postcss-safe-parser "^6.0.0"
 
 postcss-markdown@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/postcss-markdown/-/postcss-markdown-1.1.0.tgz#be983fda951d47aa0fe3166a01c65a6b094e5016"
-  integrity sha512-pt3GzuvyrZT0xCryAVaGKjs2AqfcHLFTJ+Tud8xaq10v8SjJr1GT1dt6kDEYfoBoZ7/itk0b1+XWIMXgczGrhg==
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/postcss-markdown/-/postcss-markdown-1.2.0.tgz#252dd318e5fc62c803aa9c4f046a61e2a3b38462"
+  integrity sha512-sO7eeu6pq5F0lx3XavY/rBVmifXbMTd6fGRuXaT/Q7wEuIAWTi0E2t747nQ57iVz99WynTPls4mw5wlLvZLFzw==
   dependencies:
     mdast-util-from-markdown "^0.8.5"
     mdast-util-frontmatter "^0.2.0"
     micromark-extension-frontmatter "^0.2.2"
-    postcss "^8.3.9"
+    postcss "^8.4.0"
     postcss-safe-parser "^6.0.0"
 
 postcss-media-query-parser@^0.2.3:
@@ -3005,14 +3005,14 @@ postcss-value-parser@^4.1.0:
   resolved "https://registry.yarnpkg.com/postcss-value-parser/-/postcss-value-parser-4.1.0.tgz#443f6a20ced6481a2bda4fa8532a6e55d789a2cb"
   integrity sha512-97DXOFbQJhk71ne5/Mt6cOu6yxsSfM0QGQyl0L25Gca4yGWEGJaig7l7gbCX623VqTBNGLRLaVUCnNkcedlRSQ==
 
-postcss@^8.3.11, postcss@^8.3.9:
-  version "8.3.11"
-  resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.3.11.tgz#c3beca7ea811cd5e1c4a3ec6d2e7599ef1f8f858"
-  integrity sha512-hCmlUAIlUiav8Xdqw3Io4LcpA1DOt7h3LSTAC4G6JGHFFaWzI6qvFt9oilvl8BmkbBRX1IhM90ZAmpk68zccQA==
+postcss@^8.3.11, postcss@^8.4.0:
+  version "8.4.4"
+  resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.4.4.tgz#d53d4ec6a75fd62557a66bb41978bf47ff0c2869"
+  integrity sha512-joU6fBsN6EIer28Lj6GDFoC/5yOZzLCfn0zHAn/MYXI7aPt4m4hK5KC5ovEZXy+lnCjmYIbQWngvju2ddyEr8Q==
   dependencies:
     nanoid "^3.1.30"
     picocolors "^1.0.0"
-    source-map-js "^0.6.2"
+    source-map-js "^1.0.1"
 
 prelude-ls@^1.2.1:
   version "1.2.1"
@@ -3250,10 +3250,10 @@ slice-ansi@^4.0.0:
     astral-regex "^2.0.0"
     is-fullwidth-code-point "^3.0.0"
 
-source-map-js@^0.6.2:
-  version "0.6.2"
-  resolved "https://registry.yarnpkg.com/source-map-js/-/source-map-js-0.6.2.tgz#0bb5de631b41cfbda6cfba8bd05a80efdfd2385e"
-  integrity sha512-/3GptzWzu0+0MBQFrDKzw/DvvMTUORvgY6k6jd/VS6iCR4RDTKWH6v6WPwQoUO8667uQEf9Oe38DxAYWY5F/Ug==
+source-map-js@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/source-map-js/-/source-map-js-1.0.1.tgz#a1741c131e3c77d048252adfa24e23b908670caf"
+  integrity sha512-4+TN2b3tqOCd/kaGRJ/sTYA0tR0mdXx26ipdolxcwtJVqEnqNYvlCAt1q3ypy4QMlYus+Zh34RNtYLoq2oQ4IA==
 
 source-map-support@^0.5.6:
   version "0.5.16"
