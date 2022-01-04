@@ -51,10 +51,17 @@ module.exports = stylelint.createPlugin(
         editorconfig: true,
       });
 
-      const prettierFileInfo = prettier.getFileInfo.sync(filepath, {
-        resolveConfig: true,
-        ignorePath: '.prettierignore',
-      });
+      const stylelintFileInfoOptions =
+        (options && options.fileInfoOptions) || {};
+
+      const prettierFileInfo = prettier.getFileInfo.sync(
+        filepath,
+        Object.assign(
+          {},
+          {resolveConfig: true, ignorePath: '.prettierignore'},
+          stylelintFileInfoOptions
+        )
+      );
 
       // Skip if file is ignored using a .prettierignore file
       if (prettierFileInfo.ignored) {
@@ -229,6 +236,7 @@ function omitStylelintSpecificOptions(options) {
   const prettierOptions = Object.assign({}, options);
   delete prettierOptions.message;
   delete prettierOptions.severity;
+  delete prettierOptions.fileInfoOptions;
   return prettierOptions;
 }
 

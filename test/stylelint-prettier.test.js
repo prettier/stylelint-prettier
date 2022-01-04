@@ -687,6 +687,29 @@ describe('stylelint configurations', () => {
       );
     });
   });
+
+  it('resolves prettier fileInfoOptions', () => {
+    const linted = stylelint.lint({
+      files: [filename('file-options', 'custom-ignore-me.css')],
+      config: {
+        plugins: ['./'],
+        rules: {
+          'prettier/prettier': [
+            true,
+            {
+              fileInfoOptions: {
+                ignorePath: filename('file-options', '.prettierignore'),
+              },
+            },
+          ],
+        },
+      },
+    });
+
+    return linted.then(({errored}) => {
+      expect(errored).toBe(false);
+    });
+  });
 });
 
 /**
