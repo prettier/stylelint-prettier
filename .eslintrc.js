@@ -1,17 +1,17 @@
 'use strict';
 
 module.exports = {
-  plugins: ['node'],
+  plugins: ['n'],
   extends: [
     'eslint:recommended',
-    'plugin:node/recommended',
+    'plugin:n/recommended',
     'plugin:prettier/recommended',
   ],
   env: {node: true},
   root: true,
   rules: {
-    'node/no-unpublished-require': ['error', {allowModules: ['stylelint']}],
-    'node/no-missing-require': ['error', {allowModules: ['styled-components']}],
+    'n/no-unpublished-require': ['error', {allowModules: ['stylelint']}],
+    'n/no-missing-require': ['error', {allowModules: ['styled-components']}],
   },
   overrides: [
     {
