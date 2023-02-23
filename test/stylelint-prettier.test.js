@@ -156,6 +156,7 @@ testRule({
 testRule({
   ruleName,
   config: true,
+  customSyntax: 'postcss',
   codeFilename: filename('default', 'dummy.wxss'),
   accept: [
     {

@@ -1,26 +1,28 @@
 name: CI
 
 on:
+  pull_request: ~
   push:
-    branches: [master]
-  pull_request:
+    branches: [main]
 
 jobs:
   ci:
     name: 'Test: Node ${{ matrix.node-version }} - Stylelint ${{ matrix.stylelint-version }} - Prettier ${{ matrix.prettier-version }}'
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
-        stylelint-version: [14.x]
-        node-version: [16.x, 14.x, 12.x]
+        stylelint-version: [14.x, 15.x]
+        node-version: [18.x, 16.x, 14.x]
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
+          cache: yarn
 
       - name: Use Stylelint ${{ matrix.stylelint-version }}
         run: yarn upgrade stylelint@${{ matrix.stylelint-version }}
