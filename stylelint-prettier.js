@@ -204,7 +204,7 @@ module.exports = stylelint.createPlugin(
         return;
       }
 
-      // Report in the the order the differences appear in the content
+      // Report in the order the differences appear in the content
       differences.forEach((difference) => {
         switch (difference.operation) {
           case INSERT:
