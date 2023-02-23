@@ -15,9 +15,12 @@ describe('E2E Tests', () => {
     const expectedResult = `
 check.invalid.css
  2:25  ✖  Replace ""x"" with "'x'"  prettier/prettier
+
+1 problem (1 error, 0 warnings)
 `.trim();
 
     expect(result.output).toEqual(expectedResult);
+    expect(result.error).toEqual('');
     expect(result.status).toEqual(2);
   });
 
@@ -28,9 +31,12 @@ check.invalid.css
 check.invalid.scss
  2:25  ✖  Replace ""x"" with "'x'"  prettier/prettier
  8:14  ✖  Insert ","                prettier/prettier
+
+2 problems (2 errors, 0 warnings)
 `.trim();
 
     expect(result.output).toEqual(expectedResult);
+    expect(result.error).toEqual('');
     expect(result.status).toEqual(2);
   });
 
@@ -44,6 +50,7 @@ check.invalid.scss
     const expectedResult = ``;
 
     expect(result.output).toEqual(expectedResult);
+    expect(result.error).toEqual('');
     expect(result.status).toEqual(0);
   });
 
@@ -57,6 +64,7 @@ check.invalid.scss
     const expectedResult = ``;
 
     expect(result.output).toEqual(expectedResult);
+    expect(result.error).toEqual('');
     expect(result.status).toEqual(0);
   });
 });

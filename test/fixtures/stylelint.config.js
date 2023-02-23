@@ -1,6 +1,5 @@
 module.exports = {
   plugins: [`../..`],
-  extends: ['stylelint-config-prettier'],
   rules: {
     'prettier/prettier': [true, {singleQuote: true, trailingComma: 'all'}],
   },
@@ -11,7 +10,7 @@ module.exports = {
     },
     {
       "files": ["**/*.{js,jsx,tsx}"],
-      "customSyntax": "@stylelint/postcss-css-in-js",
+      "customSyntax": "postcss-styled-syntax",
     },
     {
       "files": ["**/*.{html,svelte,vue}"],

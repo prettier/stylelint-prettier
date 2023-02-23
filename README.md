@@ -49,33 +49,41 @@ Then, in your `.stylelintrc`:
 }
 ```
 
-## Recommended Configuration
+Alternatively you can extend from the `stylelint-prettier/recommended` config,
+which does the same thing:
 
-This plugin works best if you disable all other Stylelint rules relating to code formatting, and only enable rules that detect patterns in the AST. (If another active Stylelint rule disagrees with `prettier` about how code should be formatted, it will be impossible to avoid lint errors.) You can use [stylelint-config-prettier](https://github.com/prettier/stylelint-config-prettier) to disable all formatting-related Stylelint rules.
+```json
+{
+  "extends": ["stylelint-prettier/recommended"]
+}
+```
 
-If your desired formatting does not match the `prettier` output, you should use a different tool such as [prettier-stylelint](https://github.com/hugomrdias/prettier-stylelint) instead.
+## Disabling rules that may conflict with Prettier
 
-To integrate this plugin with `stylelint-config-prettier`, you can use the `"recommended"` configuration:
+As of Stylelint v15, [Stylelint deprecated all stylistic rules that conflict
+with prettier](https://stylelint.io/migration-guide/to-15/#deprecated-stylistic-rules).
+If you are using Stylelint v15 and are not using any of these deprecated rules then you do not need to do anything extra; this section does not apply to you.
 
-1.  In addition to the above installation instructions, install `stylelint-config-prettier`:
+If you are using Stylelint's stylistic rules, then many of them shall conflict with Prettier. This plugin works best if you disable all other Stylelint rules relating to stylistic opinions. If another active Stylelint rule disagrees with `prettier` about how code should be formatted, it will be impossible to avoid lint errors. You should use [stylelint-config-prettier](https://github.com/prettier/stylelint-config-prettier) to disable all stylistic Stylelint rules.
 
-    ```sh
-    npm install --save-dev stylelint-config-prettier
-    ```
+To integrate this plugin with `stylelint-config-prettier`:
 
-2.  Then replace the plugins and rules declarations in your `.stylelintrc` that you added in the prior section with:
+1. In addition to the above installation instructions, install `stylelint-config-prettier`:
 
-    ```json
-    {
-      "extends": ["stylelint-prettier/recommended"]
-    }
-    ```
+   ```sh
+   npm install --save-dev stylelint-config-prettier
+   ```
 
-This does three things:
+2. Then add `stylelint-config-prettier` to the list of extended configs in your `.stylelintrc` that you added in the prior section. `stylelint-config-prettier` should go last in the array so that it will override other configs:
 
-1.  Enables the `stylelint-plugin-prettier` plugin.
-2.  Enables the `prettier/prettier` rule.
-3.  Extends the `stylelint-config-prettier` configuration.
+   ```json
+   {
+     "extends": [
+       "stylelint-prettier/recommended"
+       "stylelint-config-prettier"
+     ]
+   }
+   ```
 
 You can then set Prettier's own options inside a `.prettierrc` file.
 
