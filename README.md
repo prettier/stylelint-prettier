@@ -70,20 +70,20 @@ To integrate this plugin with `stylelint-config-prettier`:
 
 1. In addition to the above installation instructions, install `stylelint-config-prettier`:
 
-    ```sh
-    npm install --save-dev stylelint-config-prettier
-    ```
+   ```sh
+   npm install --save-dev stylelint-config-prettier
+   ```
 
 2. Then add `stylelint-config-prettier` to the list of extended configs in your `.stylelintrc` that you added in the prior section. `stylelint-config-prettier` should go last in the array so that it will override other configs:
 
-    ```json
-    {
-      "extends": [
-        "stylelint-prettier/recommended"
-        "stylelint-config-prettier"
-      ]
-    }
-    ```
+   ```json
+   {
+     "extends": [
+       "stylelint-prettier/recommended"
+       "stylelint-config-prettier"
+     ]
+   }
+   ```
 
 You can then set Prettier's own options inside a `.prettierrc` file.
 
