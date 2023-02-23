@@ -106,6 +106,21 @@ Objects are passed directly to Prettier as [options](https://prettier.io/docs/en
 
 NB: This option will merge and override any config set with `.prettierrc` files (for Prettier < 1.7.0, config files are ignored)
 
+### Additional Options
+
+- fileInfoOptions: Options that are passed to [prettier.getFileInfo](https://prettier.io/docs/en/api.html#prettiergetfileinfofilepath--options) in order to decide if a particular file needs to be formatted. As an example, this can be used to override the default ignorePath inferred from the current working directory.
+
+```json
+{
+  "rules": {
+    "prettier/prettier": [
+      true,
+      {"fileInfoOptions": {"ignorePath": "../../.prettierignore"}}
+    ]
+  }
+}
+```
+
 ---
 
 ## Contributing
