@@ -1,5 +1,14 @@
 # Changelog
 
+## 3.0.0 (2023-02-22)
+
+Remove `stylelint-config-prettier` from the recommended config. [Stylelint v15 deprecated the rules that `stylelint-config-prettier` disabled](https://stylelint.io/migration-guide/to-15/#deprecated-stylistic-rules), thus if you do not use those deprecated rules then you do not need `stylelint-config-prettier`. If you are still using these deprecated rules then you should install and configure `stylelint-config-prettier` separatly.
+
+Increase the mimimum required node version. No code changes have been required and v2.0.0 works with stylelint v15, however continuing to test with the unsupported node 12 is a burden that is not worth carrying.
+
+- Minimum node requirement is now "^14.17.0 || >=16.0.0" (drop support for v12.x)
+- If you extended from the `stylelint-prettier/recommended` in v2 then you must add an explict extend from `stylelint-config-prettier` to retain the same behaviour.
+
 ## 2.0.0 (2021-11-05)
 
 Increase the minimum required versions of `stylelint`, `prettier` and `node`. No code changes have been required and v1.2.0 works with stylelint v14, however continuing to test old these old unsupported versions is getting more difficult thanks to internal API changes. (#198)
