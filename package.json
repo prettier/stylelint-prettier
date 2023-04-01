@@ -46,7 +46,7 @@
     "postcss-html": "^1.5.0",
     "postcss-markdown": "^1.2.0",
     "postcss-scss": "^4.0.6",
-    "postcss-styled-syntax": "^0.3.3",
+    "postcss-styled-syntax": "^0.4.0",
     "postcss-syntax": "^0.36.2",
     "prettier": "^2.8.4",
     "prettier-plugin-svelte": "^2.9.0",
