@@ -21,7 +21,7 @@ const messages = stylelint.utils.ruleMessages(ruleName, {
 module.exports = stylelint.createPlugin(
   ruleName,
   (expectation, options, context) => {
-    return (root, result) => {
+    return async (root, result) => {
       const validOptions = stylelint.utils.validateOptions(result, ruleName, {
         actual: expectation,
       });
@@ -47,11 +47,11 @@ module.exports = stylelint.createPlugin(
       const filepath = root.source.input.file || '<input>';
       const source = root.source.input.css;
 
-      const prettierRcOptions = prettier.resolveConfig.sync(filepath, {
+      const prettierRcOptions = await prettier.resolveConfig(filepath, {
         editorconfig: true,
       });
 
-      const prettierFileInfo = prettier.getFileInfo.sync(filepath, {
+      const prettierFileInfo = await prettier.getFileInfo(filepath, {
         resolveConfig: true,
         ignorePath: '.prettierignore',
       });
