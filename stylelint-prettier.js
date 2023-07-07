@@ -104,7 +104,7 @@ module.exports = stylelint.createPlugin(
         {filepath}
       );
       try {
-        prettierSource = prettier.format(source, prettierOptions);
+        prettierSource = await prettier.format(source, prettierOptions);
       } catch (err) {
         if (!(err instanceof SyntaxError)) {
           throw err;
