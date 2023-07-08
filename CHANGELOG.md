@@ -1,5 +1,14 @@
 # Changelog
 
+## 4.0.0 (2023-07-07)
+
+Add support for Prettier v3.
+
+In order to make Prettier v3 work, we've had to drop support for Prettier `v2.x` and Stylelint less that `v15.8.0`. Maintaining temporary support for Prettier v2 and v3 at the same time isn't worth the complication that results thanks to prettier's migration to es modules. When you update to prettier v3, ensure that you update `stylelint-prettier` at the same time.
+
+- Minimum supported `prettier` version is now `v3.0.0`.
+- Minimum supported `stylelint` version is now `v15.8.0`.
+
 ## 3.0.0 (2023-02-22)
 
 Remove `stylelint-config-prettier` from the recommended config. [Stylelint v15 deprecated the rules that `stylelint-config-prettier` disabled](https://stylelint.io/migration-guide/to-15/#deprecated-stylistic-rules), thus if you do not use those deprecated rules then you do not need `stylelint-config-prettier`. If you are still using these deprecated rules then you should install and configure `stylelint-config-prettier` separately.
