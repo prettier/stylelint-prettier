@@ -105,6 +105,9 @@ module.exports = stylelint.createPlugin(
         stylelintPrettierOptions,
         {filepath}
       );
+
+      let prettierSource;
+
       try {
         prettierSource = await prettier.format(source, prettierOptions);
       } catch (err) {

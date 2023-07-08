@@ -390,7 +390,7 @@ testRule({
 });
 
 // Scss Stress test
-stressTestScssInput = `$size: rem(10px);;;
+const stressTestScssInput = `$size: rem(10px);;;
 $base-position: rem(-4px);
 
 .Indicator {
@@ -628,7 +628,7 @@ testRule({
       description: 'Prettier EOL Invalid - UNIX',
       code: `body {\n  font-size: 12px;\n}\np {\n  color: 'black';\n}`,
       fixed: `body {\n  font-size: 12px;\n}\np {\n  color: 'black';\n}\n`,
-      message: `Insert \"⏎\" (prettier/prettier)`,
+      message: `Insert "⏎" (prettier/prettier)`,
       line: 6,
       column: 2,
     },
@@ -636,7 +636,7 @@ testRule({
       description: 'Prettier EOL Invalid - Windows',
       code: `body {\r\n  font-size: 12px;\r\n}\r\np {\r\n  color: 'black';\r\n}`,
       fixed: `body {\r\n  font-size: 12px;\r\n}\r\np {\r\n  color: 'black';\r\n}\r\n`,
-      message: `Insert \"␍⏎\" (prettier/prettier)`,
+      message: `Insert "␍⏎" (prettier/prettier)`,
       line: 6,
       column: 2,
     },
