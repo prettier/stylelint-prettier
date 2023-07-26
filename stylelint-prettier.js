@@ -55,6 +55,8 @@ module.exports = stylelint.createPlugin(
 
       const prettierFileInfo = await prettier.getFileInfo(filepath, {
         resolveConfig: true,
+        plugins:
+          prettierRcOptions.plugins ?? stylelintPrettierOptions.plugins ?? [],
         ignorePath: '.prettierignore',
       });
 
