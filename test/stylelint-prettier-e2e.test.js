@@ -45,10 +45,7 @@ check.invalid.scss
    * files
    */
   test('HTML/Markdown/Vue/Svelte files', () => {
-    // Once prettier-plugin-svelte is updated to support Prettier v3
-    // bring back testing against svelte files
-    // const result = runStylelint('*.{html,md,vue,svelte}');
-    const result = runStylelint('*.{html,md,vue}');
+    const result = runStylelint('*.{html,md,vue,svelte}');
 
     const expectedResult = ``;
 
