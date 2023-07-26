@@ -37,7 +37,7 @@ cd test/fixtures
 
 ## Publishing
 
-- Ensure you are on the master branch locally.
+- Ensure you are on the `main` branch locally.
 - Update `CHANGELOG.md` and commit.
 - Run the following:
 

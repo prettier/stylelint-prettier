@@ -1,4 +1,4 @@
-# stylelint-prettier [![Build Status](https://github.com/prettier/stylelint-prettier/workflows/CI/badge.svg?branch=master)](https://github.com/prettier/stylelint-prettier/actions?query=workflow%3ACI+branch%3Amaster)
+# stylelint-prettier [![Build Status](https://github.com/prettier/stylelint-prettier/workflows/CI/badge.svg?branch=main)](https://github.com/prettier/stylelint-prettier/actions?query=workflow%3ACI+branch%3Amain)
 
 Runs [Prettier](https://github.com/prettier/prettier) as a [Stylelint](https://stylelint.io/) rule and reports differences as individual Stylelint issues.
 
@@ -110,7 +110,7 @@ NB: This option will merge and override any config set with `.prettierrc` files 
 
 ## Contributing
 
-See [CONTRIBUTING.md](https://github.com/prettier/stylelint-prettier/blob/master/.github/CONTRIBUTING.md)
+See [CONTRIBUTING.md](https://github.com/prettier/stylelint-prettier/blob/main/.github/CONTRIBUTING.md)
 
 ## Inspiration
 
