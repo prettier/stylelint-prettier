@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.0.1 (2023-07-26)
+
+Fix `prettier-plugin-svelte` support by ensuring `.svelte` files are ignored. The regression of them not being ignored only affected v4.0.0.
+
 ## 4.0.0 (2023-07-07)
 
 Add support for Prettier v3.
