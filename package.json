@@ -1,6 +1,6 @@
 {
   "name": "stylelint-prettier",
-  "version": "4.0.1",
+  "version": "4.0.2",
   "description": "Runs prettier as an stylelint rule",
   "keywords": [
     "stylelint",
