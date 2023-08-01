@@ -50,7 +50,7 @@
     "postcss-syntax": "^0.36.2",
     "prettier": "^3.0.0",
     "prettier-plugin-svelte": "^3.0.0",
-    "strip-ansi": "^6.0.0",
+    "strip-ansi": "^7.1.0",
     "stylelint": "^15.8.0",
     "svelte": "^4.1.0",
     "typescript": "5.1.6"
