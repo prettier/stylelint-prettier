@@ -95,6 +95,7 @@ module.exports = stylelint.createPlugin(
         'html',
         'angular', // .component.html files
         'svelte',
+        'astro',
       ];
       if (parserBlockList.indexOf(prettierFileInfo.inferredParser) !== -1) {
         return;
