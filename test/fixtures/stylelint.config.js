@@ -6,7 +6,7 @@ module.exports = {
       {
         singleQuote: true,
         trailingComma: 'all',
-        plugins: ['prettier-plugin-svelte'],
+        plugins: ['prettier-plugin-svelte', 'prettier-plugin-astro'],
       }
     ],
   },
@@ -20,7 +20,7 @@ module.exports = {
       customSyntax: 'postcss-styled-syntax',
     },
     {
-      files: ['**/*.{html,svelte,vue}'],
+      files: ['**/*.{html,svelte,vue,astro}'],
       customSyntax: 'postcss-html',
     },
     {
