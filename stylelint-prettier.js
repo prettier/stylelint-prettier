@@ -150,13 +150,14 @@ module.exports = stylelint.createPlugin(
 
       const differences = generateDifferences(source, prettierSource);
 
-      const report = (message, index) => {
+      const report = (message, index, endIndex) => {
         return stylelint.utils.report({
           ruleName,
           result,
           message,
           node: root,
           index,
+          endIndex,
         });
       };
 
@@ -213,17 +214,27 @@ module.exports = stylelint.createPlugin(
 
       // Report in the order the differences appear in the content
       differences.forEach((difference) => {
+        const {offset, deleteText = ''} = difference;
         switch (difference.operation) {
           case INSERT:
-            report(messages.insert(difference.insertText), difference.offset);
+            report(
+              messages.insert(difference.insertText),
+              offset,
+              offset + deleteText.length
+            );
             break;
           case DELETE:
-            report(messages.delete(difference.deleteText), difference.offset);
+            report(
+              messages.delete(difference.deleteText),
+              difference.offset,
+              offset + deleteText.length
+            );
             break;
           case REPLACE:
             report(
               messages.replace(difference.deleteText, difference.insertText),
-              difference.offset
+              difference.offset,
+              offset + deleteText.length
             );
             break;
         }
