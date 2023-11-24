@@ -1,5 +1,10 @@
 # Changelog
 
+## 4.1.0 (2023-11-24)
+
+- Added end indexes for violations - the squiggly line in vscode will now cover more than one character. (#341)
+- Do not trigger prettier for .astro files. (#340)
+
 ## 4.0.2 (2023-07-27)
 
 Fix case where an error is thrown when no prettier configuration file is found (#311)
