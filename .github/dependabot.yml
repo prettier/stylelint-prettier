@@ -11,6 +11,8 @@ updates:
       - dependency-name: 'stylelint'
       - dependency-name: 'prettier'
       - dependency-name: 'prettier-linter-helpers'
+      # Strip ansi v7 is esm only, lets not rewrite tests just to deal with that
+      - dependency-name: 'strip-ansi'
     groups:
       dev-dependencies:
         dependency-type: development
