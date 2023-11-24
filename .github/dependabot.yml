@@ -5,3 +5,14 @@ updates:
     schedule:
       interval: 'monthly'
     open-pull-requests-limit: 10
+    ignore:
+      # Manually update stylelint and prettier, to ensure we control the range
+      # of version that we maintain support for
+      - dependency-name: 'stylelint'
+      - dependency-name: 'prettier'
+      - dependency-name: 'prettier-linter-helpers'
+    groups:
+      dev-dependencies:
+        dependency-type: development
+        patterns:
+          - '*'
