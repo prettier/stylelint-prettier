@@ -11,8 +11,11 @@ updates:
       - dependency-name: 'stylelint'
       - dependency-name: 'prettier'
       - dependency-name: 'prettier-linter-helpers'
-      # Strip ansi v7 is esm only, lets not rewrite tests just to deal with that
+      # strip-ansi v7 is esm only, lets not rewrite tests just to deal with that
       - dependency-name: 'strip-ansi'
+      # eslint-plugin-n v16 drops support for node 14, keep this till we drop
+      # support too
+      - dependency-name: 'eslint-plugin-n'
     groups:
       dev-dependencies:
         dependency-type: development
