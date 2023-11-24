@@ -23,6 +23,8 @@ testRule({
       message: 'Insert "··" (prettier/prettier)',
       line: 2,
       column: 1,
+      endLine: 2,
+      endColumn: 2,
     },
     {
       description: 'Prettier Replace - Default .prettierrc',
@@ -32,6 +34,8 @@ testRule({
         'Replace "·color:red;·" with "⏎··color:·red;⏎" (prettier/prettier)',
       line: 1,
       column: 5,
+      endLine: 1,
+      endColumn: 17,
     },
     {
       description: 'Prettier Delete - Default .prettierrc',
@@ -40,6 +44,8 @@ testRule({
       message: 'Delete ";" (prettier/prettier)',
       line: 2,
       column: 14,
+      endLine: 2,
+      endColumn: 15,
     },
   ],
 });
@@ -65,6 +71,8 @@ testRule({
       message: 'Insert "····" (prettier/prettier)',
       line: 2,
       column: 1,
+      endLine: 2,
+      endColumn: 2,
     },
     {
       description: 'Prettier Replace - Custom .prettierrc',
@@ -74,6 +82,8 @@ testRule({
         'Replace "·color:red;·" with "⏎····color:·red;⏎" (prettier/prettier)',
       line: 1,
       column: 5,
+      endLine: 1,
+      endColumn: 17,
     },
     {
       description: 'Prettier Delete - Custom .prettierrc',
@@ -82,6 +92,8 @@ testRule({
       message: 'Delete ";" (prettier/prettier)',
       line: 2,
       column: 16,
+      endline: 2,
+      endColumn: 17,
     },
   ],
 });
@@ -107,6 +119,8 @@ testRule({
       message: 'Insert "········" (prettier/prettier)',
       line: 2,
       column: 1,
+      endLine: 2,
+      endColumn: 2,
     },
     {
       description: 'Prettier Replace - Inline Options Override',
@@ -116,6 +130,8 @@ testRule({
         'Replace "·color:red;·" with "⏎········color:·red;⏎" (prettier/prettier)',
       line: 1,
       column: 5,
+      endLine: 1,
+      endColumn: 17,
     },
     {
       description: 'Prettier Delete - Inline Options Override',
@@ -124,6 +140,8 @@ testRule({
       message: 'Delete ";" (prettier/prettier)',
       line: 2,
       column: 20,
+      endLine: 2,
+      endColumn: 21,
     },
   ],
 });
@@ -148,6 +166,8 @@ testRule({
       message: 'Insert "··" (prettier/prettier)',
       line: 2,
       column: 1,
+      endLine: 2,
+      endColumn: 2,
     },
   ],
 });
@@ -172,6 +192,8 @@ testRule({
       message: 'Insert "··" (prettier/prettier)',
       line: 2,
       column: 1,
+      endLine: 2,
+      endColumn: 2,
     },
   ],
 });
@@ -218,6 +240,8 @@ testRule({
       message: 'Insert "⏎" (prettier/prettier)',
       line: 4,
       column: 2,
+      endLine: 4,
+      endColumn: 3,
     },
     // This should pass but the output goes a bit weird
     // {
@@ -227,6 +251,8 @@ testRule({
     //   message: 'Insert "␍⏎" (prettier/prettier)',
     //   line: 4,
     //   column: 2,
+    //   endLine: 4,
+    //   endColumn: 3
     // },
     {
       description: 'Prettier Invalid Raws - comment and no newline',
@@ -235,6 +261,8 @@ testRule({
       message: 'Insert "⏎" (prettier/prettier)',
       line: 5,
       column: 10,
+      endLine: 5,
+      endColumn: 11,
     },
   ],
 });
@@ -327,62 +355,84 @@ testRule({
           message: `Delete ";;;;;;;" (prettier/prettier)`,
           line: 2,
           column: 18,
+          endLine: 2,
+          endColumn: 25,
         },
         {
           message:
             'Replace ".first:after{color:·red;content:·"beep";" with "⏎.first:after·{⏎··color:·red;⏎··content:·\'beep\';⏎" (prettier/prettier)',
           line: 5,
           column: 14,
+          endLine: 5,
+          endColumn: 54,
         },
         {
           message: 'Insert "··" (prettier/prettier)',
           line: 8,
           column: 1,
+          endLine: 8,
+          endColumn: 2,
         },
         {
           message:
             'Replace "content:·"beep"" with "··content:·\'beep\'" (prettier/prettier)',
           line: 9,
           column: 1,
+          endLine: 9,
+          endColumn: 16,
         },
         {
           message:
             'Replace ".final:after{color:·blue;content:·"shift";}" with "⏎.final:after·{⏎··color:·blue;⏎··content:·\'shift\';" (prettier/prettier)',
           line: 12,
           column: 14,
+          endLine: 12,
+          endColumn: 57,
         },
         {
           message: 'Insert "}" (prettier/prettier)',
           line: 13,
           column: 1,
+          endLine: 13,
+          endColumn: 2,
         },
         {
           message: 'Insert "··" (prettier/prettier)',
           line: 16,
           column: 1,
+          endLine: 16,
+          endColumn: 2,
         },
         {
           message:
             'Replace ".ham{display:inline" with "⏎.ham·{⏎··display:·inline;⏎" (prettier/prettier)',
           line: 17,
           column: 2,
+          endLine: 17,
+          endColumn: 21,
         },
         {
           message:
             'Replace "····display:·block;;;;;;;;" with "··display:·block;" (prettier/prettier)',
           line: 20,
           column: 1,
+          endLine: 20,
+          endColumn: 27,
         },
         {
           message: 'Delete "⏎" (prettier/prettier)',
           line: 21,
           column: 2,
+          endLine: 22,
+          endColumn: 1,
         },
         {
           message:
             'Replace ".final:after{color:·blue;content:·"shift";" with "⏎.final:after·{⏎··color:·blue;⏎··content:·\'shift\';⏎" (prettier/prettier)',
           line: 24,
           column: 14,
+          endLine: 24,
+          endColumn: 56,
         },
       ],
     },
@@ -541,17 +591,23 @@ testRule({
           message: `Delete ";;" (prettier/prettier)`,
           line: 1,
           column: 18,
+          endLine: 1,
+          endColumn: 20,
         },
         {
           message: 'Insert "," (prettier/prettier)',
           line: 33,
           column: 22,
+          endLine: 33,
+          endColumn: 23,
         },
         {
           message:
             'Replace "transform:·scale(0.85)" with "⏎····transform:·scale(0.85);⏎··" (prettier/prettier)',
           line: 43,
           column: 53,
+          endLine: 43,
+          endColumn: 75,
         },
       ],
     },
@@ -580,6 +636,8 @@ testRule({
       message: `Insert "," (prettier/prettier)`,
       line: 4,
       column: 14,
+      endLine: 4,
+      endColumn: 15,
     },
   ],
 });
@@ -604,6 +662,8 @@ testRule({
       message: `Insert "," (prettier/prettier)`,
       line: 4,
       column: 14,
+      endLine: 4,
+      endColumn: 15,
     },
   ],
 });
@@ -631,6 +691,8 @@ testRule({
       message: `Insert "⏎" (prettier/prettier)`,
       line: 6,
       column: 2,
+      endLine: 6,
+      endColumn: 3,
     },
     {
       description: 'Prettier EOL Invalid - Windows',
@@ -639,6 +701,8 @@ testRule({
       message: `Insert "␍⏎" (prettier/prettier)`,
       line: 6,
       column: 2,
+      endLine: 6,
+      endColumn: 3,
     },
   ],
 });
