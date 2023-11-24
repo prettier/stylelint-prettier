@@ -44,8 +44,8 @@ check.invalid.scss
    * Don't act upon html-like files, as prettier already handles them as whole
    * files
    */
-  test('HTML/Markdown/Vue/Svelte files', () => {
-    const result = runStylelint('*.{html,md,vue,svelte}');
+  test('HTML/Markdown/Vue/Svelte/Astro files', () => {
+    const result = runStylelint('*.{html,md,vue,svelte,astro}');
 
     const expectedResult = ``;
 
