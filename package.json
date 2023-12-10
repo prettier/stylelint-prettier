@@ -9,12 +9,12 @@
   ],
   "author": "Ben Scott",
   "files": [
-    "stylelint-prettier.js",
+    "index.js",
     "recommended.js",
     "README.md",
     "LICENSE.md"
   ],
-  "main": "stylelint-prettier.js",
+  "main": "index.js",
   "scripts": {
     "lint": "eslint .",
     "test": "yarn run lint && node --experimental-vm-modules node_modules/jest/bin/jest.js",
