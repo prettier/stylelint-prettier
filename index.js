@@ -1,8 +1,5 @@
-const stylelint = require('stylelint');
-const {
-  showInvisibles,
-  generateDifferences,
-} = require('prettier-linter-helpers');
+import stylelint from 'stylelint';
+import {showInvisibles, generateDifferences} from 'prettier-linter-helpers';
 
 const prettierPromise = import('prettier');
 
@@ -245,7 +242,7 @@ const ruleFunction = (expectation, options, context) => {
 ruleFunction.ruleName = ruleName;
 ruleFunction.messages = messages;
 
-module.exports = stylelint.createPlugin(ruleName, ruleFunction);
+export default stylelint.createPlugin(ruleName, ruleFunction);
 
 function omitStylelintSpecificOptions(options) {
   const prettierOptions = Object.assign({}, options);

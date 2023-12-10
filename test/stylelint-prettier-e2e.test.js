@@ -1,6 +1,9 @@
-const {spawnSync} = require('child_process');
-const {resolve} = require('path');
-const stripAnsi = require('strip-ansi');
+import {spawnSync} from 'node:child_process';
+import {resolve, dirname} from 'node:path';
+import {fileURLToPath} from 'node:url';
+import stripAnsi from 'strip-ansi';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 /**
  * Tests that report errors in multiple files may change the order of the files
@@ -19,8 +22,8 @@ check.invalid.css
 1 problem (1 error, 0 warnings)
 `.trim();
 
-    expect(result.output).toEqual(expectedResult);
-    expect(result.error).toEqual('');
+    expect(result.output).toEqual('');
+    expect(result.error).toEqual(expectedResult);
     expect(result.status).toEqual(2);
   });
 
@@ -35,8 +38,8 @@ check.invalid.scss
 2 problems (2 errors, 0 warnings)
 `.trim();
 
-    expect(result.output).toEqual(expectedResult);
-    expect(result.error).toEqual('');
+    expect(result.output).toEqual('');
+    expect(result.error).toEqual(expectedResult);
     expect(result.status).toEqual(2);
   });
 
@@ -49,8 +52,8 @@ check.invalid.scss
 
     const expectedResult = ``;
 
-    expect(result.output).toEqual(expectedResult);
-    expect(result.error).toEqual('');
+    expect(result.output).toEqual('');
+    expect(result.error).toEqual(expectedResult);
     expect(result.status).toEqual(0);
   });
 
@@ -63,8 +66,8 @@ check.invalid.scss
 
     const expectedResult = ``;
 
-    expect(result.output).toEqual(expectedResult);
-    expect(result.error).toEqual('');
+    expect(result.output).toEqual('');
+    expect(result.error).toEqual(expectedResult);
     expect(result.status).toEqual(0);
   });
 });

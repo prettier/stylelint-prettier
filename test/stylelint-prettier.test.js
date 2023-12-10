@@ -1,6 +1,10 @@
-const path = require('path');
-const {ruleName} = require('..');
-const stylelint = require('stylelint');
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+import stylelint from 'stylelint';
+import plugin from '../index.js';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const {ruleName} = plugin;
 
 // Reading from default .prettierrc
 testRule({

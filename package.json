@@ -14,7 +14,11 @@
     "README.md",
     "LICENSE.md"
   ],
-  "main": "index.js",
+  "type": "module",
+  "exports": {
+    ".": "./index.js",
+    "./recommended": "./recommended.js"
+  },
   "scripts": {
     "lint": "eslint .",
     "test": "yarn run lint && node --experimental-vm-modules node_modules/jest/bin/jest.js",
@@ -33,7 +37,7 @@
   },
   "peerDependencies": {
     "prettier": ">=3.0.0",
-    "stylelint": ">=15.8.0"
+    "stylelint": ">=16.0.0"
   },
   "devDependencies": {
     "eslint": "^8.44.0",
@@ -41,7 +45,7 @@
     "eslint-plugin-n": "^15.7.0",
     "eslint-plugin-prettier": "^5.0.0",
     "jest": "^29.6.1",
-    "jest-preset-stylelint": "^6.3.2",
+    "jest-preset-stylelint": "^7.0.0",
     "postcss": "^8.4.25",
     "postcss-html": "^1.5.0",
     "postcss-markdown": "^1.2.0",
@@ -52,12 +56,12 @@
     "prettier-plugin-astro": "^0.12.1",
     "prettier-plugin-svelte": "^3.0.0",
     "strip-ansi": "^6.0.0",
-    "stylelint": "^15.8.0",
+    "stylelint": "^16.0.1",
     "svelte": "^4.1.0",
     "typescript": "5.3.2"
   },
   "engines": {
-    "node": "^14.17.0 || >=16.0.0"
+    "node": ">=18.12.0"
   },
   "jest": {
     "preset": "jest-preset-stylelint",
