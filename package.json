@@ -42,7 +42,7 @@
   "devDependencies": {
     "eslint": "^8.44.0",
     "eslint-config-prettier": "^9.0.0",
-    "eslint-plugin-n": "^15.7.0",
+    "eslint-plugin-n": "^16.3.1",
     "eslint-plugin-prettier": "^5.0.0",
     "postcss": "^8.4.25",
     "postcss-html": "^1.5.0",
@@ -53,7 +53,7 @@
     "prettier": "^3.0.0",
     "prettier-plugin-astro": "^0.12.1",
     "prettier-plugin-svelte": "^3.0.0",
-    "strip-ansi": "^6.0.0",
+    "strip-ansi": "^7.1.0",
     "stylelint": "^16.0.1",
     "stylelint-test-rule-node": "^0.2.0",
     "svelte": "^4.1.0",
