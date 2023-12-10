@@ -61,8 +61,8 @@ which does the same thing:
 ## Disabling rules that may conflict with Prettier
 
 As of Stylelint v15, [Stylelint deprecated all stylistic rules that conflict
-with prettier](https://stylelint.io/migration-guide/to-15/#deprecated-stylistic-rules).
-If you are using Stylelint v15 and are not using any of these deprecated rules then you do not need to do anything extra; this section does not apply to you.
+with prettier](https://stylelint.io/migration-guide/to-15/#deprecated-stylistic-rules), and [removed these rules](https://stylelint.io/migration-guide/to-16/#removed-deprecated-stylistic-rules) in Stylelint v16.
+If you are using Stylelint v15 or above and are not using any of these deprecated rules then you do not need to do anything extra; this section does not apply to you.
 
 If you are using Stylelint's stylistic rules, then many of them shall conflict with Prettier. This plugin works best if you disable all other Stylelint rules relating to stylistic opinions. If another active Stylelint rule disagrees with `prettier` about how code should be formatted, it will be impossible to avoid lint errors. You should use [stylelint-config-prettier](https://github.com/prettier/stylelint-config-prettier) to disable all stylistic Stylelint rules.
 
