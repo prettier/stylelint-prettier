@@ -1,3 +1,5 @@
+import {describe, test} from 'node:test';
+import assert from 'node:assert/strict';
 import {spawnSync} from 'node:child_process';
 import {resolve, dirname} from 'node:path';
 import {fileURLToPath} from 'node:url';
@@ -22,9 +24,9 @@ check.invalid.css
 1 problem (1 error, 0 warnings)
 `.trim();
 
-    expect(result.output).toEqual('');
-    expect(result.error).toEqual(expectedResult);
-    expect(result.status).toEqual(2);
+    assert.strictEqual(result.output, '');
+    assert.strictEqual(result.error, expectedResult);
+    assert.strictEqual(result.status, 2);
   });
 
   test('SCSS files', () => {
@@ -38,9 +40,9 @@ check.invalid.scss
 2 problems (2 errors, 0 warnings)
 `.trim();
 
-    expect(result.output).toEqual('');
-    expect(result.error).toEqual(expectedResult);
-    expect(result.status).toEqual(2);
+    assert.strictEqual(result.output, '');
+    assert.strictEqual(result.error, expectedResult);
+    assert.strictEqual(result.status, 2);
   });
 
   /**
@@ -52,9 +54,9 @@ check.invalid.scss
 
     const expectedResult = ``;
 
-    expect(result.output).toEqual('');
-    expect(result.error).toEqual(expectedResult);
-    expect(result.status).toEqual(0);
+    assert.strictEqual(result.output, '');
+    assert.strictEqual(result.error, expectedResult);
+    assert.strictEqual(result.status, 0);
   });
 
   /**
@@ -66,9 +68,9 @@ check.invalid.scss
 
     const expectedResult = ``;
 
-    expect(result.output).toEqual('');
-    expect(result.error).toEqual(expectedResult);
-    expect(result.status).toEqual(0);
+    assert.strictEqual(result.output, '');
+    assert.strictEqual(result.error, expectedResult);
+    assert.strictEqual(result.status, 0);
   });
 });
 

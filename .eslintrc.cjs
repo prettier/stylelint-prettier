@@ -18,11 +18,4 @@ module.exports = {
       {ignores: ['dynamicImport']},
     ],
   },
-  overrides: [
-    {
-      files: ['**/*.test.js'],
-      env: {jest: true},
-      globals: {testRule: true},
-    },
-  ],
 };
