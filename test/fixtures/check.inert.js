@@ -1,4 +1,4 @@
-const styled = require('styled-components');
+import styled from 'styled-components';
 
 const Button = styled.div`
   background-image: url("x");

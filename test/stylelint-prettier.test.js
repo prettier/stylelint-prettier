@@ -1,9 +1,18 @@
-const path = require('path');
-const {ruleName} = require('..');
-const stylelint = require('stylelint');
+import {describe, it, beforeEach, afterEach, mock} from 'node:test';
+import assert from 'node:assert/strict';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+import stylelint from 'stylelint';
+import {testRule} from 'stylelint-test-rule-node';
+import plugin from '../index.js';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const plugins = [plugin];
+const {ruleName} = plugin;
 
 // Reading from default .prettierrc
 testRule({
+  plugins,
   ruleName,
   config: true,
   codeFilename: filename('default'),
@@ -52,6 +61,7 @@ testRule({
 
 // Reading from custom .prettierrc
 testRule({
+  plugins,
   ruleName,
   config: true,
   codeFilename: filename('custom'),
@@ -100,6 +110,7 @@ testRule({
 
 // Merging options from config into .prettierrc
 testRule({
+  plugins,
   ruleName,
   config: [true, {tabWidth: 8}],
   codeFilename: filename('default'),
@@ -148,6 +159,7 @@ testRule({
 
 // Use the css parser if no filename was specified
 testRule({
+  plugins,
   ruleName,
   config: true,
   fix: true,
@@ -174,6 +186,7 @@ testRule({
 
 // Use the parser specified in overrides in .prettierrc
 testRule({
+  plugins,
   ruleName,
   config: true,
   customSyntax: 'postcss',
@@ -200,6 +213,7 @@ testRule({
 
 // Ignoring files in .prettierignore
 testRule({
+  plugins,
   ruleName,
   config: true,
   codeFilename: filename('default', 'ignore-me.css'),
@@ -213,6 +227,7 @@ testRule({
 
 // Testing Comments
 testRule({
+  plugins,
   ruleName,
   config: [true, {endOfLine: 'auto'}],
   codeFilename: filename('default'),
@@ -334,6 +349,7 @@ const stressTestCssExpected = `.foo {
 `;
 
 testRule({
+  plugins,
   ruleName,
   config: true,
   codeFilename: filename('default'),
@@ -569,6 +585,7 @@ $pip-animation: (
 `;
 
 testRule({
+  plugins,
   ruleName,
   config: true,
   codeFilename: filename('default', 'dummy.scss'),
@@ -616,6 +633,7 @@ testRule({
 
 // Test trailing commas in near-empty scss files
 testRule({
+  plugins,
   ruleName,
   config: [true, {trailingComma: 'all'}],
   codeFilename: filename('default', 'dummy.scss'),
@@ -644,6 +662,7 @@ testRule({
 
 // Passing a syntax works
 testRule({
+  plugins,
   ruleName,
   config: [true, {parser: 'scss', trailingComma: 'all'}],
   customSyntax: 'postcss-scss',
@@ -670,6 +689,7 @@ testRule({
 
 // EOL Tests
 testRule({
+  plugins,
   ruleName,
   config: [true, {endOfLine: 'auto'}],
   fix: true,
@@ -710,15 +730,15 @@ testRule({
 describe('stylelint configurations', () => {
   const oldWarn = console.warn;
   beforeEach(() => {
-    console.warn = jest.fn(console.warn);
+    console.warn = mock.fn(console.warn);
   });
 
   afterEach(() => {
     console.warn = oldWarn;
   });
 
-  it("doesn't raise prettier warnings on `message`", () => {
-    const linted = stylelint.lint({
+  it("doesn't raise prettier warnings on `message`", async () => {
+    await stylelint.lint({
       code: ``,
       config: {
         plugins: ['./'],
@@ -728,15 +748,11 @@ describe('stylelint configurations', () => {
       },
     });
 
-    return linted.then(() => {
-      expect(console.warn).not.toHaveBeenCalledWith(
-        expect.stringMatching(/ignored unknown option.+message/i)
-      );
-    });
+    assert.strictEqual(console.warn.mock.calls.length, 0);
   });
 
-  it("doesn't raise prettier warnings on `severity`", () => {
-    const linted = stylelint.lint({
+  it("doesn't raise prettier warnings on `severity`", async () => {
+    await stylelint.lint({
       code: ``,
       config: {
         plugins: ['./'],
@@ -746,11 +762,7 @@ describe('stylelint configurations', () => {
       },
     });
 
-    return linted.then(() => {
-      expect(console.warn).not.toHaveBeenCalledWith(
-        expect.stringMatching(/ignored unknown option.+severity/i)
-      );
-    });
+    assert.strictEqual(console.warn.mock.calls.length, 0);
   });
 });
 
