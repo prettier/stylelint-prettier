@@ -1,5 +1,13 @@
 # Changelog
 
+## 5.0.0 (2023-12-10)
+
+Increase the minimum required versions of `stylelint`and `node`. Stylelint v16
+has converted its codebase to esm and has [deprecated its commonjs apis](https://github.com/stylelint/stylelint/blob/16.0.0/docs/migration-guide/to-16.md#deprecated-commonjs-api). We've followed their suggested migration guide and `stylelint-prettier` is now an esm-only package. This has required dropping support for v15 at the same time.
+
+- Minimum stylelint version is now v16 (drop support for v15.x)
+- Minimum node requirements is now >=18.12.0 (drop support for v14.x and v16.x)
+
 ## 4.1.0 (2023-11-24)
 
 - Added end indexes for violations - the squiggly line in vscode will now cover more than one character. (#341)
