@@ -40,24 +40,24 @@
     "stylelint": ">=16.0.0"
   },
   "devDependencies": {
-    "eslint": "^8.44.0",
+    "eslint": "^9.4.0",
     "eslint-config-prettier": "^9.0.0",
-    "eslint-plugin-n": "^16.3.1",
+    "eslint-plugin-n": "^17.7.0",
     "eslint-plugin-prettier": "^5.0.0",
     "postcss": "^8.4.25",
     "postcss-html": "^1.5.0",
     "postcss-markdown": "^1.2.0",
     "postcss-scss": "^4.0.6",
-    "postcss-styled-syntax": "^0.5.0",
+    "postcss-styled-syntax": "^0.6.4",
     "postcss-syntax": "^0.36.2",
     "prettier": "^3.0.0",
-    "prettier-plugin-astro": "^0.12.1",
+    "prettier-plugin-astro": "^0.14.0",
     "prettier-plugin-svelte": "^3.0.0",
     "strip-ansi": "^7.1.0",
     "stylelint": "^16.0.1",
     "stylelint-test-rule-node": "^0.2.0",
     "svelte": "^4.1.0",
-    "typescript": "5.3.2"
+    "typescript": "5.4.5"
   },
   "engines": {
     "node": ">=18.12.0"
