@@ -1,9 +1,8 @@
 import {describe, test} from 'node:test';
 import assert from 'node:assert/strict';
 import {spawnSync} from 'node:child_process';
-import {resolve, dirname} from 'node:path';
+import {resolve, sep, dirname} from 'node:path';
 import {fileURLToPath} from 'node:url';
-import stripAnsi from 'strip-ansi';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -18,10 +17,7 @@ describe('E2E Tests', () => {
     const result = runStylelint('*.css');
 
     const expectedResult = `
-check.invalid.css
- 2:25  ✖  Replace ""x"" with "'x'"  prettier/prettier
-
-1 problem (1 error, 0 warnings)
+::error file=check.invalid.css,line=2,col=25,endLine=2,endColumn=28,title=Stylelint problem::Replace ""x"" with "'x'" (prettier/prettier)
 `.trim();
 
     assert.strictEqual(result.output, '');
@@ -33,11 +29,8 @@ check.invalid.css
     const result = runStylelint('*.scss');
 
     const expectedResult = `
-check.invalid.scss
- 2:25  ✖  Replace ""x"" with "'x'"  prettier/prettier
- 8:14  ✖  Insert ","                prettier/prettier
-
-2 problems (2 errors, 0 warnings)
+::error file=check.invalid.scss,line=2,col=25,endLine=2,endColumn=28,title=Stylelint problem::Replace ""x"" with "'x'" (prettier/prettier)
+::error file=check.invalid.scss,line=8,col=14,endLine=8,endColumn=15,title=Stylelint problem::Insert "," (prettier/prettier)
 `.trim();
 
     assert.strictEqual(result.output, '');
@@ -76,14 +69,19 @@ check.invalid.scss
 
 function runStylelint(pattern) {
   const stylelintCmd = resolve(`${__dirname}/../node_modules/.bin/stylelint`);
+  const cwd = `${__dirname}/fixtures`;
 
-  const result = spawnSync(stylelintCmd, [pattern], {
-    cwd: `${__dirname}/fixtures`,
+  // Use github formatter as it is less likely to change across releases
+  const result = spawnSync(stylelintCmd, ['--formatter=github', pattern], {
+    cwd,
   });
 
   return {
     status: result.status,
-    output: stripAnsi(result.stdout.toString().trim()),
-    error: stripAnsi(result.stderr.toString().trim()),
+    output: result.stdout.toString().trim(),
+    error: result.stderr
+      .toString()
+      .trim()
+      .replaceAll(`file=${cwd}${sep}`, 'file='),
   };
 }
