@@ -43,7 +43,6 @@ const ruleFunction = (expectation, options, context) => {
     // Default to '<input>' if a filepath was not provided.
     // This mimics eslint's behaviour
     const filepath = root.source.input.file || '<input>';
-    const source = root.source.input.css;
 
     const prettierRcOptions = await prettier.resolveConfig(filepath, {
       editorconfig: true,
@@ -107,6 +106,7 @@ const ruleFunction = (expectation, options, context) => {
 
     let prettierSource;
 
+    const source = root.toString();
     try {
       prettierSource = await prettier.format(source, prettierOptions);
     } catch (err) {
@@ -182,7 +182,7 @@ const ruleFunction = (expectation, options, context) => {
           insertText +
           rawData.substring(difference.offset + deleteText.length)
         );
-      }, root.source.input.css);
+      }, source);
 
       // If root.source.syntax exists then it means stylelint had to use
       // postcss-syntax to guess the postcss parser that it should use based

@@ -4,7 +4,13 @@ import {spawnSync} from 'node:child_process';
 import {resolve, sep, dirname} from 'node:path';
 import {fileURLToPath} from 'node:url';
 
+import stylelint from 'stylelint';
+
+import baseConfig from './fixtures/stylelint.config.js';
+
 const __dirname = dirname(fileURLToPath(import.meta.url));
+
+const stylelintCwd = `${__dirname}/fixtures`;
 
 /**
  * Tests that report errors in multiple files may change the order of the files
@@ -65,15 +71,33 @@ describe('E2E Tests', () => {
     assert.strictEqual(result.error, expectedResult);
     assert.strictEqual(result.status, 0);
   });
+
+  /** @see https://github.com/prettier/stylelint-prettier/issues/354 */
+  test('the --fix option works correctly with other rules', async () => {
+    const inputCode = `.a {\n  color: #ffffff;\n  font-size: 16px\n}\n`;
+    const fixConfig = structuredClone(baseConfig);
+    fixConfig.rules['color-hex-length'] = 'short';
+
+    const {code: outputCode} = await stylelint.lint({
+      code: inputCode,
+      configBasedir: stylelintCwd,
+      fix: true,
+      config: fixConfig,
+    });
+
+    assert.strictEqual(
+      outputCode,
+      '.a {\n  color: #fff;\n  font-size: 16px;\n}\n'
+    );
+  });
 });
 
 function runStylelint(pattern) {
   const stylelintCmd = resolve(`${__dirname}/../node_modules/.bin/stylelint`);
-  const cwd = `${__dirname}/fixtures`;
 
   // Use github formatter as it is less likely to change across releases
   const result = spawnSync(stylelintCmd, ['--formatter=github', pattern], {
-    cwd,
+    cwd: stylelintCwd,
   });
 
   return {
@@ -82,6 +106,6 @@ function runStylelint(pattern) {
     error: result.stderr
       .toString()
       .trim()
-      .replaceAll(`file=${cwd}${sep}`, 'file='),
+      .replaceAll(`file=${stylelintCwd}${sep}`, 'file='),
   };
 }
