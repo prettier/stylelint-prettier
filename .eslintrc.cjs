@@ -7,4 +7,7 @@ module.exports = {
     'plugin:n/recommended',
     'plugin:prettier/recommended',
   ],
+  env: {
+    node: true,
+  },
 };
