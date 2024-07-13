@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.0.1 (2024-07-13)
+
+Fix case where when autofixing multiple other rules in addition to prettier, the other autofixes would be thrown away (#360)
+
 ## 5.0.0 (2023-12-10)
 
 Increase the minimum required versions of `stylelint`and `node`. Stylelint v16
