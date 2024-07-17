@@ -46,6 +46,7 @@
     "eslint-plugin-prettier": "^5.0.0",
     "postcss": "^8.4.25",
     "postcss-html": "^1.5.0",
+    "postcss-less": "^6.0.0",
     "postcss-markdown": "^1.2.0",
     "postcss-scss": "^4.0.6",
     "postcss-styled-syntax": "^0.5.0",

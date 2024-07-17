@@ -44,6 +44,20 @@ describe('E2E Tests', () => {
     assert.strictEqual(result.status, 2);
   });
 
+  test('LESS files', () => {
+    const result = runStylelint('*.less');
+
+    const expectedResult = `
+::error file=check.invalid.less,line=2,col=25,endLine=2,endColumn=28,title=Stylelint problem::Replace ""x"" with "'x'" (prettier/prettier)
+::error file=check.invalid.less,line=8,col=12,endLine=8,endColumn=13,title=Stylelint problem::Insert ";" (prettier/prettier)
+::error file=check.invalid.less,line=12,col=1,endLine=12,endColumn=2,title=Stylelint problem::Insert "··" (prettier/prettier)
+`.trim();
+
+    assert.strictEqual(result.output, '');
+    assert.strictEqual(result.error, expectedResult);
+    assert.strictEqual(result.status, 2);
+  });
+
   /**
    * Don't act upon html-like files, as prettier already handles them as whole
    * files

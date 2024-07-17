@@ -16,6 +16,10 @@ export default {
       customSyntax: 'postcss-scss',
     },
     {
+      files: ['**/*.less'],
+      customSyntax: 'postcss-less',
+    },
+    {
       files: ['**/*.{js,jsx,tsx}'],
       customSyntax: 'postcss-styled-syntax',
     },

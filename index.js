@@ -106,7 +106,7 @@ const ruleFunction = (expectation, options, context) => {
 
     let prettierSource;
 
-    const source = root.toString();
+    const source = root.toString(result.opts.syntax);
     try {
       prettierSource = await prettier.format(source, prettierOptions);
     } catch (err) {
