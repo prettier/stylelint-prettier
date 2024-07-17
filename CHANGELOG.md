@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.0.2 (2024-07-16)
+
+Fix case where less files were incorrectly mangled when using v5.0.1 (#363)
+
 ## 5.0.1 (2024-07-13)
 
 Fix case where when autofixing multiple other rules in addition to prettier, the other autofixes would be thrown away (#360)
