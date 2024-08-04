@@ -1,7 +1,7 @@
 import {describe, test} from 'node:test';
 import assert from 'node:assert/strict';
 import {spawnSync} from 'node:child_process';
-import {resolve, sep, dirname} from 'node:path';
+import {resolve, relative, dirname} from 'node:path';
 import {fileURLToPath} from 'node:url';
 
 import stylelint from 'stylelint';
@@ -109,17 +109,32 @@ describe('E2E Tests', () => {
 function runStylelint(pattern) {
   const stylelintCmd = resolve(`${__dirname}/../node_modules/.bin/stylelint`);
 
-  // Use github formatter as it is less likely to change across releases
-  const result = spawnSync(stylelintCmd, ['--formatter=github', pattern], {
+  // Use json formatter as it is less likely to change across releases
+  const result = spawnSync(stylelintCmd, ['--formatter=json', pattern], {
     cwd: stylelintCwd,
   });
+
+  const jsonErrors = JSON.parse(result.stderr.toString().trim());
+
+  const errorLines = [];
+
+  for (const error of jsonErrors) {
+    for (const warning of error.warnings) {
+      errorLines.push(
+        `::error file=${relative(stylelintCwd, error.source)}` +
+          `,line=${warning.line}` +
+          `,col=${warning.column}` +
+          `,endLine=${warning.endLine}` +
+          `,endColumn=${warning.endColumn}` +
+          `,title=Stylelint problem` +
+          `::${warning.text}`
+      );
+    }
+  }
 
   return {
     status: result.status,
     output: result.stdout.toString().trim(),
-    error: result.stderr
-      .toString()
-      .trim()
-      .replaceAll(`file=${stylelintCwd}${sep}`, 'file='),
+    error: errorLines.join('\n'),
   };
 }
