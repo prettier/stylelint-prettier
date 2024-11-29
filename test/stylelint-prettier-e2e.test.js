@@ -113,8 +113,17 @@ function runStylelint(pattern) {
   const result = spawnSync(stylelintCmd, ['--formatter=json', pattern], {
     cwd: stylelintCwd,
   });
+  const resultContent = result.stderr.toString().trim();
 
-  const jsonErrors = JSON.parse(result.stderr.toString().trim());
+  let jsonErrors;
+  try {
+    jsonErrors = JSON.parse(resultContent);
+  } catch (err) {
+    throw new Error(
+      `Could not parse json from stderr. Attempted to parse:\n${resultContent}`,
+      {cause: err}
+    );
+  }
 
   const errorLines = [];
 
