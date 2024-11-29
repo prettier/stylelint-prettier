@@ -1585,10 +1585,10 @@ prettier-plugin-svelte@^3.3.2:
   resolved "https://registry.yarnpkg.com/prettier-plugin-svelte/-/prettier-plugin-svelte-3.3.2.tgz#f0c0b023a697f5cb43fb7257170e3d8762b547c6"
   integrity sha512-kRPjH8wSj2iu+dO+XaUv4vD8qr5mdDmlak3IT/7AOgGIMRG86z/EHOLauFcClKEnOUf4A4nOA7sre5KrJD4Raw==
 
-prettier@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.npmjs.org/prettier/-/prettier-3.0.0.tgz"
-  integrity sha512-zBf5eHpwHOGPC47h0zrPyNn+eAEIdEzfywMoYn2XPi0P44Zp0tSq64rq0xAREh4auw2cJZHo9QUob+NqCQky4g==
+prettier@^3.0.0, prettier@^3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-3.3.0.tgz#d173ea0524a691d4c0b1181752f2b46724328cdf"
+  integrity sha512-J9odKxERhCQ10OC2yb93583f6UnYutOeiV5i0zEDS7UGTdUt0u+y8erxl3lBKvwo/JHyyoEdXjwp4dke9oyZ/g==
 
 punycode@^2.1.0:
   version "2.1.1"
