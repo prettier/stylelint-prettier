@@ -1,6 +1,0 @@
-!.eslintrc.js
-node_modules
-
-# Ignore everything in the fixtures dir except the stylelint config
-test/fixtures
-!test/fixtures/stylelint.config.js
