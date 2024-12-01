@@ -641,7 +641,7 @@ eslint@^9.16.0:
     natural-compare "^1.4.0"
     optionator "^0.9.3"
 
-esm-env@^1.2.0:
+esm-env@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/esm-env/-/esm-env-1.2.1.tgz#34c2a0ba60582948afbe7bd779bc66f9d3aece7e"
   integrity sha512-U9JedYYjCnadUlXk7e1Kr+aENQhtUaoaV9+gZm1T8LC/YBAPJx3NSPIAurFOC0U5vrdSevnUJS2/wUVxGwPhng==
@@ -662,10 +662,10 @@ esquery@^1.5.0:
   dependencies:
     estraverse "^5.1.0"
 
-esrap@^1.2.2:
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/esrap/-/esrap-1.2.2.tgz#b9e3afee3f12238563a763b7fa86220de2c53203"
-  integrity sha512-F2pSJklxx1BlQIQgooczXCPHmcWpn6EsP5oo73LQfonG9fIlIENQ8vMmfGXeojP9MrkzUNAfyU5vdFlR9shHAw==
+esrap@^1.2.3:
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/esrap/-/esrap-1.2.3.tgz#abe6c0cffeee013aaa8396ad8eaa7c0553768323"
+  integrity sha512-ZlQmCCK+n7SGoqo7DnfKaP1sJZa49P01/dXzmjCASSo04p72w8EksT2NMK8CEX8DhKsfJXANioIw8VyHNsBfvQ==
   dependencies:
     "@jridgewell/sourcemap-codec" "^1.4.15"
     "@types/estree" "^1.0.1"
@@ -1620,9 +1620,9 @@ supports-hyperlinks@^3.0.0:
     supports-color "^7.0.0"
 
 svelte@^5.2.11:
-  version "5.2.11"
-  resolved "https://registry.yarnpkg.com/svelte/-/svelte-5.2.11.tgz#aeba2d0fb8017d2769682ffe321c15b3db10f157"
-  integrity sha512-rAVKne02inlyw//aD1QXuUbxDBNnyW6sagS7JfxzUbGVuJnHrf2WfQdJDYlBq8mOz8NBGQAZdD6KEITd0NUDtA==
+  version "5.2.12"
+  resolved "https://registry.yarnpkg.com/svelte/-/svelte-5.2.12.tgz#248d11e0d69a907d88192c6aa64e788c3d77def5"
+  integrity sha512-lcrJVygO05nzQkgRLxaz3qd0kamyhujfpCxalzzKabJUueVrnpc0bhHgR2hUa/335XvOHO39wtc79C72g+5ftw==
   dependencies:
     "@ampproject/remapping" "^2.3.0"
     "@jridgewell/sourcemap-codec" "^1.5.0"
@@ -1631,8 +1631,8 @@ svelte@^5.2.11:
     acorn-typescript "^1.4.13"
     aria-query "^5.3.1"
     axobject-query "^4.1.0"
-    esm-env "^1.2.0"
-    esrap "^1.2.2"
+    esm-env "^1.2.1"
+    esrap "^1.2.3"
     is-reference "^3.0.3"
     locate-character "^3.0.0"
     magic-string "^0.30.11"
