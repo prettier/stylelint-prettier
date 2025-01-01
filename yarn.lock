@@ -102,10 +102,10 @@
     minimatch "^3.1.2"
     strip-json-comments "^3.1.1"
 
-"@eslint/js@9.16.0", "@eslint/js@^9.16.0":
-  version "9.16.0"
-  resolved "https://registry.yarnpkg.com/@eslint/js/-/js-9.16.0.tgz#3df2b2dd3b9163056616886c86e4082f45dbf3f4"
-  integrity sha512-tw2HxzQkrbeuvyj1tG2Yqq+0H9wGoI2IMk4EOsQeX+vmd75FtJAzf+gTA69WF+baUKRYQ3x2kbLE08js5OsTVg==
+"@eslint/js@9.17.0", "@eslint/js@^9.16.0":
+  version "9.17.0"
+  resolved "https://registry.yarnpkg.com/@eslint/js/-/js-9.17.0.tgz#1523e586791f80376a6f8398a3964455ecc651ec"
+  integrity sha512-Sxc4hqcs1kTu0iID3kcZDW3JHq2a77HO9P8CP6YEA/FpH3Ll8UXE2r/86Rz9YJLKme39S9vU5OWNjC6Xl0Cr3w==
 
 "@eslint/object-schema@^2.1.4":
   version "2.1.4"
@@ -205,7 +205,7 @@
   resolved "https://registry.yarnpkg.com/@pkgr/core/-/core-0.1.1.tgz#1ec17e2edbec25c8306d424ecfbf13c7de1aaa31"
   integrity sha512-cq8o4cWH0ibXh9VGi5P20Tu9XF/0fFXl9EUinr9QfTM7a7p0oTA4iJRCQWppXR1Pg8dSM0UCItCkPwsk9qWWYA==
 
-"@types/estree@^1.0.1", "@types/estree@^1.0.5", "@types/estree@^1.0.6":
+"@types/estree@^1.0.5", "@types/estree@^1.0.6":
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/@types/estree/-/estree-1.0.6.tgz#628effeeae2064a1b4e79f78e81d87b7e5fc7b50"
   integrity sha512-AYnb1nQyY49te+VRAVgmzfcgjYS91mY5P0TKUDCLEM+gNnA+3T6rWITXRLYCpahpqSQbN5cE+gHpnPyXjHWxcw==
@@ -380,6 +380,11 @@ character-reference-invalid@^1.0.0:
   resolved "https://registry.npmjs.org/character-reference-invalid/-/character-reference-invalid-1.1.4.tgz"
   integrity sha512-mKKUkUbhPpQlCOfIuZkvSEgktjPFIsZKRRbC6KWVEMvlzblj3i3asQv5ODsrwt0N3pHAEvjP8KTQPHkp0+6jOg==
 
+clsx@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/clsx/-/clsx-2.1.1.tgz#eed397c9fd8bd882bfb18deab7102049a2f32999"
+  integrity sha512-eYm0QWBtUrBWZWG0d386OGAw16Z995PiOVo2B7bjWSbHedGl5e0ZWaq65kOGgUSNesEIDkB9ISbTg/JK9dhCZA==
+
 color-convert@^1.9.0:
   version "1.9.3"
   resolved "https://registry.npmjs.org/color-convert/-/color-convert-1.9.3.tgz"
@@ -424,7 +429,7 @@ cosmiconfig@^9.0.0:
     js-yaml "^4.1.0"
     parse-json "^5.2.0"
 
-cross-spawn@^7.0.5:
+cross-spawn@^7.0.6:
   version "7.0.6"
   resolved "https://registry.yarnpkg.com/cross-spawn/-/cross-spawn-7.0.6.tgz#8a58fe78f00dcd70c370451759dfbfaf03e8ee9f"
   integrity sha512-uV2QOWP2nWzsy2aMp8aRibhi9dlzF5Hgh5SHaB9OiTGEyDTiJJyx0uy51QXdyWbtAHNua4XJzUKca3OzKUd3vA==
@@ -562,9 +567,9 @@ eslint-plugin-es-x@^7.8.0:
     eslint-compat-utils "^0.5.1"
 
 eslint-plugin-n@^17.14.0:
-  version "17.14.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-n/-/eslint-plugin-n-17.14.0.tgz#162a7c17a7ce7e3834af537bca68ab8b6aa26edc"
-  integrity sha512-maxPLMEA0rPmRpoOlxEclKng4UpDe+N5BJS4t24I3UKnN109Qcivnfs37KMy84G0af3bxjog5lKctP5ObsvcTA==
+  version "17.15.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-n/-/eslint-plugin-n-17.15.1.tgz#2129bbc7b11466c3bfec57876a15aadfad3a83f2"
+  integrity sha512-KFw7x02hZZkBdbZEFQduRGH4VkIH4MW97ClsbAM4Y4E6KguBJWGfWG1P4HEIpZk2bkoWf0bojpnjNAhYQP8beA==
   dependencies:
     "@eslint-community/eslint-utils" "^4.4.1"
     enhanced-resolve "^5.17.1"
@@ -602,16 +607,16 @@ eslint-visitor-keys@^4.2.0:
   integrity sha512-UyLnSehNt62FFhSwjZlHmeokpRK59rcz29j+F1/aDgbkbRTk7wIc9XzdoasMUbRNKDM0qQt/+BJ4BrpFeABemw==
 
 eslint@^9.16.0:
-  version "9.16.0"
-  resolved "https://registry.yarnpkg.com/eslint/-/eslint-9.16.0.tgz#66832e66258922ac0a626f803a9273e37747f2a6"
-  integrity sha512-whp8mSQI4C8VXd+fLgSM0lh3UlmcFtVwUQjyKCFfsp+2ItAIYhlq/hqGahGqHE6cv9unM41VlqKk2VtKYR2TaA==
+  version "9.17.0"
+  resolved "https://registry.yarnpkg.com/eslint/-/eslint-9.17.0.tgz#faa1facb5dd042172fdc520106984b5c2421bb0c"
+  integrity sha512-evtlNcpJg+cZLcnVKwsai8fExnqjGPicK7gnUtlNuzu+Fv9bI0aLpND5T44VLQtoMEnI57LoXO9XAkIXwohKrA==
   dependencies:
     "@eslint-community/eslint-utils" "^4.2.0"
     "@eslint-community/regexpp" "^4.12.1"
     "@eslint/config-array" "^0.19.0"
     "@eslint/core" "^0.9.0"
     "@eslint/eslintrc" "^3.2.0"
-    "@eslint/js" "9.16.0"
+    "@eslint/js" "9.17.0"
     "@eslint/plugin-kit" "^0.2.3"
     "@humanfs/node" "^0.16.6"
     "@humanwhocodes/module-importer" "^1.0.1"
@@ -620,7 +625,7 @@ eslint@^9.16.0:
     "@types/json-schema" "^7.0.15"
     ajv "^6.12.4"
     chalk "^4.0.0"
-    cross-spawn "^7.0.5"
+    cross-spawn "^7.0.6"
     debug "^4.3.2"
     escape-string-regexp "^4.0.0"
     eslint-scope "^8.2.0"
@@ -641,7 +646,7 @@ eslint@^9.16.0:
     natural-compare "^1.4.0"
     optionator "^0.9.3"
 
-esm-env@^1.2.0:
+esm-env@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/esm-env/-/esm-env-1.2.1.tgz#34c2a0ba60582948afbe7bd779bc66f9d3aece7e"
   integrity sha512-U9JedYYjCnadUlXk7e1Kr+aENQhtUaoaV9+gZm1T8LC/YBAPJx3NSPIAurFOC0U5vrdSevnUJS2/wUVxGwPhng==
@@ -662,13 +667,12 @@ esquery@^1.5.0:
   dependencies:
     estraverse "^5.1.0"
 
-esrap@^1.2.2:
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/esrap/-/esrap-1.2.2.tgz#b9e3afee3f12238563a763b7fa86220de2c53203"
-  integrity sha512-F2pSJklxx1BlQIQgooczXCPHmcWpn6EsP5oo73LQfonG9fIlIENQ8vMmfGXeojP9MrkzUNAfyU5vdFlR9shHAw==
+esrap@^1.3.2:
+  version "1.3.2"
+  resolved "https://registry.yarnpkg.com/esrap/-/esrap-1.3.2.tgz#a0644603f7f8e9f068c77052d6e16cd4062b5f88"
+  integrity sha512-C4PXusxYhFT98GjLSmb20k9PREuUdporer50dhzGuJu9IJXktbMddVCMLAERl5dAHyAi73GWWCE4FVHGP1794g==
   dependencies:
     "@jridgewell/sourcemap-codec" "^1.4.15"
-    "@types/estree" "^1.0.1"
 
 esrecurse@^4.3.0:
   version "4.3.0"
@@ -1620,9 +1624,9 @@ supports-hyperlinks@^3.0.0:
     supports-color "^7.0.0"
 
 svelte@^5.2.11:
-  version "5.2.11"
-  resolved "https://registry.yarnpkg.com/svelte/-/svelte-5.2.11.tgz#aeba2d0fb8017d2769682ffe321c15b3db10f157"
-  integrity sha512-rAVKne02inlyw//aD1QXuUbxDBNnyW6sagS7JfxzUbGVuJnHrf2WfQdJDYlBq8mOz8NBGQAZdD6KEITd0NUDtA==
+  version "5.16.0"
+  resolved "https://registry.yarnpkg.com/svelte/-/svelte-5.16.0.tgz#43ef960ee20ccf3fe8a52882a5253acaeb52ec2b"
+  integrity sha512-Ygqsiac6UogVED2ruKclU+pOeMThxWtp9LG+li7BXeDKC2paVIsRTMkNmcON4Zejerd1s5sZHWx6ZtU85xklVg==
   dependencies:
     "@ampproject/remapping" "^2.3.0"
     "@jridgewell/sourcemap-codec" "^1.5.0"
@@ -1631,8 +1635,9 @@ svelte@^5.2.11:
     acorn-typescript "^1.4.13"
     aria-query "^5.3.1"
     axobject-query "^4.1.0"
-    esm-env "^1.2.0"
-    esrap "^1.2.2"
+    clsx "^2.1.1"
+    esm-env "^1.2.1"
+    esrap "^1.3.2"
     is-reference "^3.0.3"
     locate-character "^3.0.0"
     magic-string "^0.30.11"
