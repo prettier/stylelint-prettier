@@ -133,7 +133,7 @@ const ruleFunction = (expectation, options, context) => {
         message,
         node: root,
         index: getIndexFromLoc(source, err.loc.start),
-        endInd: getIndexFromLoc(source, err.loc.end),
+        endIndex: getIndexFromLoc(source, err.loc.start + result.css.length),
       });
 
       return;
