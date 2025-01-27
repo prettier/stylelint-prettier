@@ -127,12 +127,17 @@ const ruleFunction = (expectation, options, context) => {
         message = message.replace(/ \(\d+:\d+\)$/, '');
       }
 
+      const startIndex = getIndexFromLoc(source, err.loc.start);
+
       stylelint.utils.report({
         ruleName,
         result,
         message,
         node: root,
-        index: getIndexFromLoc(source, err.loc.start),
+        index: startIndex,
+        endIndex: err.loc.end
+          ? getIndexFromLoc(source, err.loc.end)
+          : startIndex + 1,
       });
 
       return;
