@@ -1,6 +1,6 @@
 {
   "name": "stylelint-prettier",
-  "version": "5.0.2",
+  "version": "5.0.3",
   "description": "Runs prettier as an stylelint rule",
   "keywords": [
     "stylelint",
@@ -45,17 +45,17 @@
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-n": "^17.14.0",
     "eslint-plugin-prettier": "^5.2.1",
-    "postcss": "^8.4.49",
+    "postcss": "^8.5.1",
     "postcss-html": "^1.7.0",
     "postcss-less": "^6.0.0",
     "postcss-markdown": "^1.2.0",
     "postcss-scss": "^4.0.9",
-    "postcss-styled-syntax": "^0.7.0",
+    "postcss-styled-syntax": "^0.7.1",
     "postcss-syntax": "^0.36.2",
     "prettier": "^3.3.0",
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-svelte": "^3.3.2",
-    "stylelint": "^16.0.1",
+    "stylelint": "^16.13.2",
     "stylelint-test-rule-node": "^0.3.0",
     "svelte": "^5.2.11",
     "typescript": "5.7.2"
