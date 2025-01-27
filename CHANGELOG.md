@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.0.3 (2025-01-26)
+
+Avoid deprecation warning when encountering parsing errors in Stylelint >=16.13.0 (#385)
+
 ## 5.0.2 (2024-07-16)
 
 Fix case where less files were incorrectly mangled when using v5.0.1 (#363)
