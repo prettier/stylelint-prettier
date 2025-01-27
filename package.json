@@ -42,7 +42,7 @@
   "devDependencies": {
     "@eslint/js": "^9.16.0",
     "eslint": "^9.16.0",
-    "eslint-config-prettier": "^9.1.0",
+    "eslint-config-prettier": "^10.0.1",
     "eslint-plugin-n": "^17.14.0",
     "eslint-plugin-prettier": "^5.2.1",
     "postcss": "^8.5.1",
@@ -56,9 +56,9 @@
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-svelte": "^3.3.2",
     "stylelint": "^16.13.2",
-    "stylelint-test-rule-node": "^0.3.0",
+    "stylelint-test-rule-node": "^0.4.0",
     "svelte": "^5.2.11",
-    "typescript": "5.7.2"
+    "typescript": "5.7.3"
   },
   "engines": {
     "node": ">=18.12.0"
