@@ -7,7 +7,7 @@ on:
 
 jobs:
   ci:
-    name: 'Test: Node ${{ matrix.node-version }} - Stylelint ${{ matrix.stylelint-version }} - Prettier ${{ matrix.prettier-version }}'
+    name: 'Test: Node ${{ matrix.node-version }} - Stylelint ${{ matrix.stylelint-version }}'
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
