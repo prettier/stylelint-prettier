@@ -19,10 +19,11 @@
     ".": "./index.js",
     "./recommended": "./recommended.js"
   },
+  "license": "MIT",
   "scripts": {
-    "lint": "eslint .",
-    "test": "yarn run lint && node --test test/*.test.js",
-    "format": "yarn run prettier '**/*.{js,json,md}' --write && yarn run lint --fix"
+    "lint": "eslint . && prettier . --check",
+    "test": "node --test test/*.test.js",
+    "format": "eslint . --fix && prettier '**/*.{js,json,md,yml}' --write"
   },
   "repository": {
     "type": "git",
@@ -63,5 +64,5 @@
   "engines": {
     "node": ">=18.12.0"
   },
-  "license": "MIT"
+  "packageManager": "pnpm@10.26.2+sha512.0e308ff2005fc7410366f154f625f6631ab2b16b1d2e70238444dd6ae9d630a8482d92a451144debc492416896ed16f7b114a86ec68b8404b2443869e68ffda6"
 }

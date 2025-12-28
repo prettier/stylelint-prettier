@@ -7,18 +7,24 @@ Thanks for contributing!
 ```sh
 git clone https://github.com/prettier/stylelint-prettier.git
 cd stylelint-prettier
-yarn install
+pnpm install
 ```
 
-## Running the tests
+## Running the tests and linters
+
+Run tests:
 
 ```sh
-yarn run test
+pnpm run test
+```
+
+Run linters:
+
+```sh
+pnpm run lint
 ```
 
 This is a [Stylelint](https://stylelint.io/) plugin. Documentation for the APIs that it uses can be found on Stylelint's [Writing Plugins](https://stylelint.io/developer-guide/plugins/) page.
-
-Linting is ran as part of `yarn run test`. The build will fail if there are any linting errors. You can run `yarn run lint --fix` to fix some linting errors (including formatting to match prettier's expectations). To run the tests without linting run `node --test test/*.test.js`.
 
 ### End to end tests
 
@@ -37,18 +43,22 @@ cd test/fixtures
 
 - Ensure you are on the `main` branch locally.
 - Update `CHANGELOG.md` and commit.
-- Run the following:
+- Run the following (replacing patch with minor or major if you want a different range):
 
   ```sh
-  yarn publish
+  pnpm version patch
+  pnpm publish
   git push --follow-tags
   ```
 
-  Running `yarn publish` shall:
+  Running `pnpm version major|minor|patch` shall:
 
-  - Bump the version in package.json (asking you for the new version number)
+  - Bump the version in package.json (depending on semver range you wanted)
   - Create a new commit containing that version bump in package.json
   - Create a tag for that commit
+
+  Running `pnpm publish` shall:
+
   - Publish to the npm repository
 
   Running `git push --follow-tags` shall:
