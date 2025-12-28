@@ -52,15 +52,12 @@ cd test/fixtures
   ```
 
   Running `pnpm version major|minor|patch` shall:
-
   - Bump the version in package.json (depending on semver range you wanted)
   - Create a new commit containing that version bump in package.json
   - Create a tag for that commit
 
   Running `pnpm publish` shall:
-
   - Publish to the npm repository
 
   Running `git push --follow-tags` shall:
-
   - Push the commit and tag to GitHub

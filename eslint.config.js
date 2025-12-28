@@ -1,10 +1,13 @@
+import {defineConfig} from 'eslint/config';
 import js from '@eslint/js';
 import eslintPluginN from 'eslint-plugin-n';
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 
-export default [
-  js.configs.recommended,
-  eslintPluginN.configs['flat/recommended-module'],
+export default defineConfig([
+  {
+    plugins: {js, n: eslintPluginN},
+    extends: ['js/recommended', 'n/flat/recommended-module'],
+  },
   eslintPluginPrettierRecommended,
   {
     files: ['test/*.test.js'],
@@ -21,4 +24,4 @@ export default [
       '!test/fixtures/stylelint.config.js',
     ],
   },
-];
+]);
