@@ -78,10 +78,7 @@ To integrate this plugin with `stylelint-config-prettier`:
 
    ```json
    {
-     "extends": [
-       "stylelint-prettier/recommended",
-       "stylelint-config-prettier"
-     ]
+     "extends": ["stylelint-prettier/recommended", "stylelint-config-prettier"]
    }
    ```
 

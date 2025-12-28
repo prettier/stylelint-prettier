@@ -16,19 +16,26 @@ jobs:
         node-version: [22.x, 20.x, 18.x]
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout Repo
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
 
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
+      - name: Setup pnpm
+        uses: pnpm/action-setup@41ff72655975bd51cab0327fa583b6e92b6d3061 # v4.2.0
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6.0.0
         with:
           node-version: ${{ matrix.node-version }}
-          cache: yarn
+          cache: pnpm
 
       - name: Use Stylelint ${{ matrix.stylelint-version }}
-        run: yarn upgrade stylelint@${{ matrix.stylelint-version }} --ignore-engines
+        run: pnpm upgrade stylelint@${{ matrix.stylelint-version }}
 
       - name: Install
-        run: yarn install --ignore-engines
+        run: pnpm install
 
       - name: Test
-        run: yarn run test
+        run: pnpm run test
+
+      - name: Lint
+        run: pnpm run lint
