@@ -16,9 +16,12 @@ const messages = stylelint.utils.ruleMessages(ruleName, {
       insertCode
     )}"`,
 });
+const meta = {
+  fixable: true,
+};
 
 /** @type {stylelint.Rule} */
-const ruleFunction = (expectation, options, context) => {
+const ruleFunction = (expectation, options) => {
   return async (root, result) => {
     const validOptions = stylelint.utils.validateOptions(result, ruleName, {
       actual: expectation,
@@ -152,42 +155,33 @@ const ruleFunction = (expectation, options, context) => {
 
     const differences = generateDifferences(source, prettierSource);
 
-    const report = (message, index, endIndex) => {
-      return stylelint.utils.report({
-        ruleName,
-        result,
-        message,
-        node: root,
-        index,
-        endIndex,
-      });
-    };
-
-    if (context.fix) {
+    const fix = () => {
       // Fixes must be processed in reverse order, as an early delete shall
       // change the modification offsets for anything after it
-      const rawData = differences.reverse().reduce((rawData, difference) => {
-        let insertText = '';
-        let deleteText = '';
-        switch (difference.operation) {
-          case INSERT:
-            insertText = difference.insertText;
-            break;
-          case DELETE:
-            deleteText = difference.deleteText;
-            break;
-          case REPLACE:
-            insertText = difference.insertText;
-            deleteText = difference.deleteText;
-            break;
-        }
+      const rawData = [...differences]
+        .reverse()
+        .reduce((rawData, difference) => {
+          let insertText = '';
+          let deleteText = '';
+          switch (difference.operation) {
+            case INSERT:
+              insertText = difference.insertText;
+              break;
+            case DELETE:
+              deleteText = difference.deleteText;
+              break;
+            case REPLACE:
+              insertText = difference.insertText;
+              deleteText = difference.deleteText;
+              break;
+          }
 
-        return (
-          rawData.substring(0, difference.offset) +
-          insertText +
-          rawData.substring(difference.offset + deleteText.length)
-        );
-      }, source);
+          return (
+            rawData.substring(0, difference.offset) +
+            insertText +
+            rawData.substring(difference.offset + deleteText.length)
+          );
+        }, source);
 
       // If root.source.syntax exists then it means stylelint had to use
       // postcss-syntax to guess the postcss parser that it should use based
@@ -211,8 +205,19 @@ const ruleFunction = (expectation, options, context) => {
       if (trailingWhitespace) {
         root.raws.after = trailingWhitespace[0];
       }
-      return;
-    }
+    };
+
+    const report = (message, index, endIndex) => {
+      return stylelint.utils.report({
+        ruleName,
+        result,
+        message,
+        node: root,
+        index,
+        endIndex,
+        fix,
+      });
+    };
 
     // Report in the order the differences appear in the content
     differences.forEach((difference) => {
@@ -246,6 +251,7 @@ const ruleFunction = (expectation, options, context) => {
 
 ruleFunction.ruleName = ruleName;
 ruleFunction.messages = messages;
+ruleFunction.meta = meta;
 
 export default stylelint.createPlugin(ruleName, ruleFunction);
 
