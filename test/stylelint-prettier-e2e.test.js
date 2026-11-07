@@ -18,7 +18,7 @@ const stylelintCwd = `${__dirname}/fixtures`;
  * To avoid flaky tests, assert the reporting of errors in one file only per
  * test case. Asserting no errors are reported across multiple files is ok.
  */
-describe('E2E Tests', () => {
+describe('E2E Tests (Standard config)', () => {
   test('CSS files', () => {
     const result = runStylelint('*.css');
 
@@ -106,13 +106,33 @@ describe('E2E Tests', () => {
   });
 });
 
-function runStylelint(pattern) {
+describe('E2E Tests (Recommended Config)', () => {
+  test('recommended config', () => {
+    const result = runStylelint('check.invalid.css', [
+      '--config=stylelint.recommended.config.js',
+    ]);
+
+    const expectedResult = `
+::error file=check.invalid.css,line=2,col=25,endLine=2,endColumn=28,title=Stylelint problem::Replace ""x"" with "'x'" (prettier/prettier)
+`.trim();
+
+    assert.strictEqual(result.output, '');
+    assert.strictEqual(result.error, expectedResult);
+    assert.strictEqual(result.status, 2);
+  });
+});
+
+function runStylelint(pattern, options = []) {
   const stylelintCmd = resolve(`${__dirname}/../node_modules/.bin/stylelint`);
 
   // Use json formatter as it is less likely to change across releases
-  const result = spawnSync(stylelintCmd, ['--formatter=json', pattern], {
-    cwd: stylelintCwd,
-  });
+  const result = spawnSync(
+    stylelintCmd,
+    ['--formatter=json', ...options, pattern],
+    {
+      cwd: stylelintCwd,
+    }
+  );
   const resultContent = result.stderr.toString().trim();
 
   let jsonErrors;
