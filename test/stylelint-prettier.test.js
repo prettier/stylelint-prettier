@@ -741,7 +741,7 @@ describe('stylelint configurations', () => {
     await stylelint.lint({
       code: ``,
       config: {
-        plugins: ['./'],
+        plugins,
         rules: {
           'prettier/prettier': [true, {message: 'welp'}],
         },
@@ -755,7 +755,7 @@ describe('stylelint configurations', () => {
     await stylelint.lint({
       code: ``,
       config: {
-        plugins: ['./'],
+        plugins,
         rules: {
           'prettier/prettier': [true, {severity: 'warning'}],
         },

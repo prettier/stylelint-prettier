@@ -1,4 +1,4 @@
 export default {
-  plugins: ['.'],
+  plugins: ['./index.js'],
   rules: {'prettier/prettier': true},
 };
