@@ -1,5 +1,24 @@
+import {createRequire} from 'node:module';
+
 import stylelint from 'stylelint';
 import {showInvisibles, generateDifferences} from 'prettier-linter-helpers';
+
+// Stylelint v16.8.2 changed how fixes should be defined.
+// In <16.8.2 `content.fix` was a boolean value, and the expected way to
+// trigger fixes was to call a fix function if that boolean was true.
+// In >= 16.8.2 `context.fix` is considered deprecated, and instead a fix
+// callback should be passed into `stylelint.utils.report`.
+// Stylelint 18.0.0 removes `content.fix` entirely.
+// This check allows us to maintain support for 16.0.0 and v18.0.0 at the same
+// time.
+// Remove this compatibility path and treat `supportsFixCallback` as true when
+// we drop Stylelint v16 support.
+const {version: stylelintVersion} = createRequire(import.meta.url)(
+  'stylelint/package.json'
+);
+const [major, minor, patch] = stylelintVersion.split('.').map(Number);
+const supportsFixCallback =
+  major > 16 || (major === 16 && (minor > 8 || (minor === 8 && patch >= 2)));
 
 const prettierPromise = import('prettier');
 
@@ -16,6 +35,9 @@ const messages = stylelint.utils.ruleMessages(ruleName, {
       insertCode
     )}"`,
 });
+const meta = {
+  fixable: true,
+};
 
 /** @type {stylelint.Rule} */
 const ruleFunction = (expectation, options, context) => {
@@ -152,42 +174,33 @@ const ruleFunction = (expectation, options, context) => {
 
     const differences = generateDifferences(source, prettierSource);
 
-    const report = (message, index, endIndex) => {
-      return stylelint.utils.report({
-        ruleName,
-        result,
-        message,
-        node: root,
-        index,
-        endIndex,
-      });
-    };
-
-    if (context.fix) {
+    const fix = () => {
       // Fixes must be processed in reverse order, as an early delete shall
       // change the modification offsets for anything after it
-      const rawData = differences.reverse().reduce((rawData, difference) => {
-        let insertText = '';
-        let deleteText = '';
-        switch (difference.operation) {
-          case INSERT:
-            insertText = difference.insertText;
-            break;
-          case DELETE:
-            deleteText = difference.deleteText;
-            break;
-          case REPLACE:
-            insertText = difference.insertText;
-            deleteText = difference.deleteText;
-            break;
-        }
+      const rawData = [...differences]
+        .reverse()
+        .reduce((rawData, difference) => {
+          let insertText = '';
+          let deleteText = '';
+          switch (difference.operation) {
+            case INSERT:
+              insertText = difference.insertText;
+              break;
+            case DELETE:
+              deleteText = difference.deleteText;
+              break;
+            case REPLACE:
+              insertText = difference.insertText;
+              deleteText = difference.deleteText;
+              break;
+          }
 
-        return (
-          rawData.substring(0, difference.offset) +
-          insertText +
-          rawData.substring(difference.offset + deleteText.length)
-        );
-      }, source);
+          return (
+            rawData.substring(0, difference.offset) +
+            insertText +
+            rawData.substring(difference.offset + deleteText.length)
+          );
+        }, source);
 
       // If root.source.syntax exists then it means stylelint had to use
       // postcss-syntax to guess the postcss parser that it should use based
@@ -211,8 +224,24 @@ const ruleFunction = (expectation, options, context) => {
       if (trailingWhitespace) {
         root.raws.after = trailingWhitespace[0];
       }
+    };
+
+    if (!supportsFixCallback && context.fix) {
+      fix();
       return;
     }
+
+    const report = (message, index, endIndex) => {
+      return stylelint.utils.report({
+        ruleName,
+        result,
+        message,
+        node: root,
+        index,
+        endIndex,
+        ...(supportsFixCallback && {fix}),
+      });
+    };
 
     // Report in the order the differences appear in the content
     differences.forEach((difference) => {
@@ -246,6 +275,7 @@ const ruleFunction = (expectation, options, context) => {
 
 ruleFunction.ruleName = ruleName;
 ruleFunction.messages = messages;
+ruleFunction.meta = meta;
 
 export default stylelint.createPlugin(ruleName, ruleFunction);
 

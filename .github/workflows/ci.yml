@@ -13,7 +13,7 @@ jobs:
       fail-fast: false
       matrix:
         node: ['26', '24', '22', '20']
-        stylelint: ['17', '16', '16.0.0']
+        stylelint: ['18', '17', '16', '16.0.0']
         include:
           - node: '18'
             stylelint: '16'
