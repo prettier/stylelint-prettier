@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.1.0 (2026-11-07)
+
+Add support for Stylelint v18. Ensure we use full file paths when referencing plugins, And use the fix API of passing a fix function into `stylelint.utils.report` instead of calling the fix function when it is available - when using Stylelint 16.8.2 and above (#396 and #397)
+
 ## 5.0.3 (2025-01-26)
 
 Avoid deprecation warning when encountering parsing errors in Stylelint >=16.13.0 (#385)
