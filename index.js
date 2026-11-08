@@ -1,5 +1,24 @@
+import {createRequire} from 'node:module';
+
 import stylelint from 'stylelint';
 import {showInvisibles, generateDifferences} from 'prettier-linter-helpers';
+
+// Stylelint v16.8.2 changed how fixes should be defined.
+// In <16.8.2 `content.fix` was a boolean value, and the expected way to
+// trigger fixes was to call a fix function if that boolean was true.
+// In >= 16.8.2 `context.fix` is considered deprecated, and instead a fix
+// callback should be passed into `stylelint.utils.report`.
+// Stylelint 18.0.0 removes `content.fix` entirely.
+// This check allows us to maintain support for 16.0.0 and v18.0.0 at the same
+// time.
+// Remove this compatibility path and treat `supportsFixCallback` as true when
+// we drop Stylelint v16 support.
+const {version: stylelintVersion} = createRequire(import.meta.url)(
+  'stylelint/package.json'
+);
+const [major, minor, patch] = stylelintVersion.split('.').map(Number);
+const supportsFixCallback =
+  major > 16 || (major === 16 && (minor > 8 || (minor === 8 && patch >= 2)));
 
 const prettierPromise = import('prettier');
 
@@ -21,7 +40,7 @@ const meta = {
 };
 
 /** @type {stylelint.Rule} */
-const ruleFunction = (expectation, options) => {
+const ruleFunction = (expectation, options, context) => {
   return async (root, result) => {
     const validOptions = stylelint.utils.validateOptions(result, ruleName, {
       actual: expectation,
@@ -207,6 +226,11 @@ const ruleFunction = (expectation, options) => {
       }
     };
 
+    if (!supportsFixCallback && context.fix) {
+      fix();
+      return;
+    }
+
     const report = (message, index, endIndex) => {
       return stylelint.utils.report({
         ruleName,
@@ -215,7 +239,7 @@ const ruleFunction = (expectation, options) => {
         node: root,
         index,
         endIndex,
-        fix,
+        ...(supportsFixCallback && {fix}),
       });
     };
 
